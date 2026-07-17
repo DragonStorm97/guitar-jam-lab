@@ -70,6 +70,7 @@ The Practice tab turns the reference diagrams into short, repeatable exercises:
 
 - Learn, play, and recall compact scale patterns.
 - Practise scales up and down, in groups of three, in thirds, or by targeting roots.
+- Follow the exercise in a six-string scrolling tab with a fixed playhead.
 - Use the global tempo with a four-count lead-in.
 - Hunt CAGED roots, build chord tones, recall shapes, and connect adjacent shapes.
 - Train note names and intervals with fretboard prompts.

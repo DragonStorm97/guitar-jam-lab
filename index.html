@@ -1755,6 +1755,134 @@
       color: #084a45;
     }
 
+    .practice-scrolling-tab {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .practice-scrolling-tab .scale-fretboard-caption {
+      padding: 13px 15px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .practice-tab-shell {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      min-width: 0;
+    }
+
+    .practice-tab-labels {
+      height: 180px;
+      display: grid;
+      grid-template-rows: repeat(6, 26px) 24px;
+      align-items: center;
+      justify-items: center;
+      border-right: 1px solid var(--line);
+      background: var(--cream);
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .practice-tab-stage {
+      position: relative;
+      height: 180px;
+      min-width: 0;
+      overflow: hidden;
+      background: linear-gradient(90deg, rgba(184, 51, 47, 0.06), transparent 34%);
+    }
+
+    .practice-tab-string-lines {
+      position: absolute;
+      inset: 0 0 24px;
+      display: grid;
+      grid-template-rows: repeat(6, 26px);
+      align-items: center;
+      pointer-events: none;
+    }
+
+    .practice-tab-string-lines span {
+      display: block;
+      width: 100%;
+      border-top: 1px solid rgba(55, 48, 40, 0.42);
+    }
+
+    .practice-tab-playhead {
+      position: absolute;
+      left: 24%;
+      top: 0;
+      bottom: 24px;
+      width: 2px;
+      background: var(--red);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .practice-tab-track {
+      position: absolute;
+      left: calc(24% - 36px);
+      top: 0;
+      height: 180px;
+      display: flex;
+      transition-property: transform;
+      transition-timing-function: linear;
+      will-change: transform;
+    }
+
+    .practice-tab-beat {
+      width: 72px;
+      min-width: 72px;
+      height: 180px;
+      display: grid;
+      grid-template-rows: repeat(6, 26px) 24px;
+      align-items: center;
+      justify-items: center;
+      color: var(--muted);
+    }
+
+    .practice-tab-slot {
+      position: relative;
+      z-index: 2;
+      min-width: 24px;
+      min-height: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .practice-tab-slot.has-note {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12);
+    }
+
+    .practice-tab-beat.is-current .practice-tab-slot.has-note {
+      border-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .practice-tab-beat.is-past .practice-tab-slot.has-note {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: #084a45;
+    }
+
+    .practice-tab-beat-number {
+      font-size: 0.66rem;
+      font-weight: 800;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .practice-tab-track {
+        transition-duration: 0ms !important;
+      }
+    }
+
     .fretboard button.practice-cell {
       min-height: 48px;
       height: 48px;
@@ -2355,6 +2483,20 @@
                 <div id="practiceScaleFretboard" class="fretboard" aria-label="Interactive scale practice fretboard"></div>
                 <div id="practiceScaleFretNumbers" class="fret-numbers" aria-hidden="true"></div>
               </div>
+              <div class="practice-scrolling-tab">
+                <div class="scale-fretboard-caption">
+                  <strong>Scrolling Tab</strong>
+                  <span id="practiceScrollingTabMeta">Standard, 82 BPM</span>
+                </div>
+                <div class="practice-tab-shell">
+                  <div id="practiceScrollingTabLabels" class="practice-tab-labels" aria-hidden="true"></div>
+                  <div id="practiceScrollingTabStage" class="practice-tab-stage" role="img" aria-label="Scrolling scale tablature">
+                    <div id="practiceScrollingTabLines" class="practice-tab-string-lines" aria-hidden="true"></div>
+                    <div class="practice-tab-playhead" aria-hidden="true"></div>
+                    <div id="practiceScrollingTabTrack" class="practice-tab-track" aria-hidden="true"></div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div class="practice-panel" data-practice-panel="caged">
@@ -2843,6 +2985,11 @@
     const practiceScaleFretNumbers = document.getElementById("practiceScaleFretNumbers");
     const practiceScaleFretboardTitle = document.getElementById("practiceScaleFretboardTitle");
     const practiceScaleFretboardMeta = document.getElementById("practiceScaleFretboardMeta");
+    const practiceScrollingTabMeta = document.getElementById("practiceScrollingTabMeta");
+    const practiceScrollingTabLabels = document.getElementById("practiceScrollingTabLabels");
+    const practiceScrollingTabStage = document.getElementById("practiceScrollingTabStage");
+    const practiceScrollingTabLines = document.getElementById("practiceScrollingTabLines");
+    const practiceScrollingTabTrack = document.getElementById("practiceScrollingTabTrack");
     const practiceCagedRootSelect = document.getElementById("practiceCagedRootSelect");
     const practiceCagedShapeSelect = document.getElementById("practiceCagedShapeSelect");
     const practiceCagedDrillSelect = document.getElementById("practiceCagedDrillSelect");
@@ -3326,6 +3473,33 @@
       return Array.from(unique.values());
     }
 
+    function renderPracticeScrollingTab() {
+      const displayStrings = STRING_KEYS.slice().reverse();
+      const currentIndex = Math.min(practiceScaleIndex, Math.max(0, practiceScalePath.length - 1));
+      practiceScrollingTabLabels.innerHTML = displayStrings.map(function(stringKey) {
+        return "<span>" + escapeHtml(stringLabel(stringKey)) + "</span>";
+      }).join("") + "<span>#</span>";
+      practiceScrollingTabLines.innerHTML = displayStrings.map(function() {
+        return "<span></span>";
+      }).join("");
+      practiceScrollingTabTrack.innerHTML = practiceScalePath.map(function(position, index) {
+        let className = "practice-tab-beat";
+        if (index < currentIndex) className += " is-past";
+        if (index === currentIndex) className += " is-current";
+        const hidden = practiceScaleStage === "recall" && index >= practiceScaleIndex;
+        const slots = displayStrings.map(function(stringKey) {
+          const active = !hidden && stringKey === position.stringKey;
+          return '<span class="practice-tab-slot' + (active ? " has-note" : "") + '">' + (active ? position.fret : "") + "</span>";
+        }).join("");
+        return '<div class="' + className + '">' + slots + '<span class="practice-tab-beat-number">' + (index + 1) + "</span></div>";
+      }).join("");
+      const playingNow = Boolean(practiceTimer) && practiceScaleStage === "play" && practiceCountIn === 0;
+      practiceScrollingTabTrack.style.transitionDuration = playingNow ? Math.max(120, 60000 / Number(tempoRange.value) * 0.82) + "ms" : "220ms";
+      practiceScrollingTabTrack.style.transform = "translateX(" + (-currentIndex * 72) + "px)";
+      practiceScrollingTabMeta.textContent = currentTuning().name + ", " + tempoRange.value + " BPM, step " + (currentIndex + 1) + " of " + practiceScalePath.length;
+      practiceScrollingTabStage.setAttribute("aria-label", "Scrolling tablature for " + practiceScaleRootSelect.value + " " + (SCALE_LIBRARY[practiceScaleSelect.value] || SCALE_LIBRARY.minorPentatonic).name + ", step " + (currentIndex + 1) + " of " + practiceScalePath.length);
+    }
+
     function drawPracticeScale() {
       if (!practiceScalePath.length) buildPracticeScalePath();
       const root = practiceScaleRootSelect.value;
@@ -3358,6 +3532,7 @@
         const noteLabel = practiceScaleStage === "recall" && index >= practiceScaleIndex ? "?" : position.note;
         return '<span class="' + className + '" title="' + escapeHtml(position.note + " at " + position.fret + "fr") + '"><strong>' + (index + 1) + '</strong><small>' + escapeHtml(noteLabel) + '</small></span>';
       }).join("");
+      renderPracticeScrollingTab();
       if (practiceCountIn > 0) {
         setPracticePrompt(practiceScalePrompt, "Count in: " + practiceCountIn, "Get your fretting hand ready. The exercise begins after the count.", "");
       } else if (current && practiceScaleStage === "recall") {
