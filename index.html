@@ -1724,10 +1724,23 @@
       border-radius: 8px;
       background: var(--panel);
       display: grid;
-      place-items: center;
+      grid-template-rows: auto auto;
+      align-content: center;
+      justify-items: center;
+      gap: 2px;
       color: var(--muted);
       font-size: 0.76rem;
       font-weight: 900;
+    }
+
+    .practice-step strong,
+    .practice-step small {
+      line-height: 1;
+    }
+
+    .practice-step small {
+      font-size: 0.66rem;
+      font-weight: 700;
     }
 
     .practice-step.current {
@@ -2317,7 +2330,7 @@
                 <div class="select-group">
                   <label for="practiceScaleLabelSelect">Labels</label>
                   <select id="practiceScaleLabelSelect" aria-label="Choose scale marker labels">
-                    <option value="intervals" selected>Intervals / notes</option>
+                    <option value="intervals" selected>Fret / note</option>
                     <option value="notes">Note names</option>
                     <option value="fingers">Suggested fingers</option>
                   </select>
@@ -3232,7 +3245,7 @@
       const labelMode = practiceScaleLabelSelect.value;
       if (labelMode === "notes") return position.note;
       if (labelMode === "fingers") return String(Math.min(4, Math.max(1, position.fret - practiceScaleRange.start + 1)));
-      return position.degree + "/" + position.note;
+      return position.fret + "/" + position.note;
     }
 
     function buildPracticeScalePath() {
@@ -3342,8 +3355,8 @@
         let className = "practice-step";
         if (index < practiceScaleIndex) className += " complete";
         if (index === practiceScaleIndex && practiceScaleIndex < practiceScalePath.length) className += " current";
-        const label = practiceScaleStage === "recall" && index >= practiceScaleIndex ? "?" : practiceScaleMarkerLabel(position);
-        return '<span class="' + className + '" title="' + escapeHtml(position.note + " at " + position.fret + "fr") + '">' + escapeHtml(label) + '</span>';
+        const noteLabel = practiceScaleStage === "recall" && index >= practiceScaleIndex ? "?" : position.note;
+        return '<span class="' + className + '" title="' + escapeHtml(position.note + " at " + position.fret + "fr") + '"><strong>' + (index + 1) + '</strong><small>' + escapeHtml(noteLabel) + '</small></span>';
       }).join("");
       if (practiceCountIn > 0) {
         setPracticePrompt(practiceScalePrompt, "Count in: " + practiceCountIn, "Get your fretting hand ready. The exercise begins after the count.", "");
