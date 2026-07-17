@@ -8,10 +8,11 @@ Live site: https://dragonstorm97.github.io/guitar-jam-lab/
 
 Guitar Jam Lab is a single-page static web app. It is meant for guitarists who can already noodle a bit and want a practical way to connect fretboard shapes, notes, intervals, harmony, and jam-friendly patterns.
 
-The app is organized into three top-level sections:
+The app is organized into four top-level sections:
 
 - **Scales**: circle of fifths, scale generator, interval explanations, fretboard view, harmony builder, and generated tab charts.
 - **CAGED**: movable C/A/G/E/D chord-shape exploration on a fretboard.
+- **Practice**: guided scale paths, CAGED drills, fretboard note recall, tempo practice, and saved progress.
 - **Blues Lab**: 12-bar blues form, A7/D7/E7 chord shapes, movable dominant 7 shapes, transpose map, blues boxes, and practice prompts.
 
 ## Features
@@ -63,6 +64,18 @@ The tab chart section generates visual and text tabs from the selected root, sca
 
 The CAGED tab shows movable chord shapes on a fretboard. Pick a root, shape, chord color, and scale overlay to see how chord tones connect to nearby scale tones.
 
+### Beginner Practice Zone
+
+The Practice tab turns the reference diagrams into short, repeatable exercises:
+
+- Learn, play, and recall compact scale patterns.
+- Practise scales up and down, in groups of three, in thirds, or by targeting roots.
+- Use the global tempo with a four-count lead-in.
+- Hunt CAGED roots, build chord tones, recall shapes, and connect adjacent shapes.
+- Train note names and intervals with fretboard prompts.
+- Focus on weak notes and keep accuracy and completion progress in local browser storage.
+- Use full CAGED drills in Standard and half-step-down tunings, or upper-five-string drills in Drop D and Drop C.
+
 ### Blues Lab
 
 The Blues Lab focuses on practical jamming:
@@ -77,12 +90,13 @@ The Blues Lab focuses on practical jamming:
 
 ## How To Use It
 
-1. Pick a tuning from the top bar.
+1. Pick a tuning and tempo from the top bar.
 2. Open the **Scales** tab and choose a root and scale.
 3. Use the fretboard and tab chart to find playable positions.
 4. Try the **Harmony Builder** to create a second-guitar part from the same scale.
 5. Open **CAGED** to connect chord shapes to the same key.
-6. Open **Blues Lab** when you want a focused 12-bar jam practice setup.
+6. Use **Practice** for guided scale, CAGED, and fretboard recall drills.
+7. Open **Blues Lab** when you want a focused 12-bar jam practice setup.
 
 ## Technical Notes
 
