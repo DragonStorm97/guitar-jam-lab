@@ -60,6 +60,15 @@ It shows:
 
 The tab chart section generates visual and text tabs from the selected root, scale, shape, and tuning. This is useful for quickly turning a scale view into something closer to a playable practice line.
 
+### Fretboard Math
+
+The Fretboard Math panel visualizes pitch-class arithmetic: each fret adds one semitone, and the values wrap from 12 back to 1. It uses the A-based numbering system `A = 1` through `G#/Ab = 12`.
+
+- Pick any open string from the current tuning and move up to 24 frets.
+- Follow the calculation on a 12-note wheel and one-string fret strip.
+- See enharmonic names such as `A#/Bb` and `C#/Db` together.
+- Practise the same calculation as a scored **Fret math** drill in Fretboard Recall.
+
 ### CAGED Shape Lab
 
 The CAGED tab shows movable chord shapes on a fretboard. Pick a root, shape, chord color, and scale overlay to see how chord tones connect to nearby scale tones.
@@ -74,6 +83,7 @@ The Practice tab turns the reference diagrams into short, repeatable exercises:
 - Use the global tempo with a four-count lead-in.
 - Hunt CAGED roots, build chord tones, recall shapes, and connect adjacent shapes.
 - Train note names and intervals with fretboard prompts.
+- Calculate fretboard notes with pitch-class arithmetic across fret ranges 0-5, 0-12, and 0-24.
 - Focus on weak notes and keep accuracy and completion progress in local browser storage.
 - Use full CAGED drills in Standard and half-step-down tunings, or upper-five-string drills in Drop D and Drop C.
 

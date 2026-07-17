@@ -1352,6 +1352,249 @@
       line-height: 1.3;
     }
 
+    .fret-math-panel {
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 16px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .fret-math-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .fret-math-header h3,
+    .fret-math-header p {
+      margin: 0;
+    }
+
+    .fret-math-header p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .fret-math-system {
+      color: var(--muted);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .fret-math-controls {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.45fr) minmax(260px, 1fr);
+      gap: 10px;
+    }
+
+    .fret-math-range {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      padding: 9px 10px;
+      display: grid;
+      grid-template-columns: auto minmax(120px, 1fr) 30px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .fret-math-range label,
+    .fret-math-range output {
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .fret-math-range output {
+      text-align: right;
+    }
+
+    .fret-math-layout {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.7fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+    }
+
+    .fret-math-wheel {
+      position: relative;
+      width: min(100%, 410px);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      border: 2px solid var(--line);
+      border-radius: 50%;
+      background: radial-gradient(circle, #fffdf8 0 47%, #f4eee4 48% 49%, #fffdf8 50% 100%);
+    }
+
+    .fret-math-wheel-point {
+      position: absolute;
+      width: 58px;
+      min-height: 38px;
+      transform: translate(-50%, -50%);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 6px;
+      color: var(--muted);
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    .fret-math-wheel-point strong {
+      color: var(--ink);
+      font-size: 0.78rem;
+    }
+
+    .fret-math-wheel-point small {
+      font-size: 0.62rem;
+      line-height: 1.05;
+    }
+
+    .fret-math-wheel-point.is-path {
+      border-color: var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .fret-math-wheel-point.is-start {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+    }
+
+    .fret-math-wheel-point.is-result {
+      border-color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .fret-math-wheel-point.is-start.is-result {
+      box-shadow: 0 0 0 3px rgba(18, 132, 122, 0.22);
+    }
+
+    .fret-math-wheel-center {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 42%;
+      text-align: center;
+      display: grid;
+      gap: 3px;
+    }
+
+    .fret-math-wheel-center strong {
+      font-size: 1.45rem;
+    }
+
+    .fret-math-wheel-center span {
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .fret-math-legend {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    .fret-math-work {
+      min-width: 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .fret-math-equation {
+      border-left: 4px solid var(--red);
+      background: var(--red-soft);
+      padding: 14px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .fret-math-equation strong {
+      font-size: 1.2rem;
+    }
+
+    .fret-math-equation span {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .fret-math-strip-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .fret-math-strip {
+      min-width: max-content;
+      display: flex;
+      background: #fffdf8;
+    }
+
+    .fret-math-cell {
+      width: 68px;
+      min-width: 68px;
+      min-height: 72px;
+      border-right: 1px solid var(--line);
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 2px;
+      color: var(--muted);
+    }
+
+    .fret-math-cell:last-child {
+      border-right: 0;
+    }
+
+    .fret-math-cell strong {
+      color: var(--ink);
+      font-size: 0.9rem;
+    }
+
+    .fret-math-cell span,
+    .fret-math-cell small {
+      font-size: 0.68rem;
+    }
+
+    .fret-math-cell.is-selected {
+      background: var(--red-soft);
+      box-shadow: inset 0 -3px 0 var(--red);
+    }
+
+    .fret-math-compact {
+      border-left: 4px solid var(--gold);
+      background: var(--gold-soft);
+      padding: 10px 12px;
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .practice-answer-grid button.math-answer {
+      display: grid;
+      grid-template-rows: auto auto;
+      align-content: center;
+      gap: 2px;
+    }
+
+    .practice-answer-grid button.math-answer span {
+      color: var(--muted);
+      font-size: 0.68rem;
+    }
+
     .scale-view-grid {
       display: grid;
       grid-template-columns: minmax(0, 1fr);
@@ -2070,6 +2313,10 @@
       .practice-summary {
         grid-template-columns: 1fr;
       }
+
+      .fret-math-layout {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 560px) {
@@ -2080,9 +2327,16 @@
       .practice-control-grid,
       .practice-mode-tabs,
       .practice-stage-row,
-      .practice-answer-grid,
       .practice-transport {
         grid-template-columns: 1fr;
+      }
+
+      .fret-math-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .practice-answer-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
       .practice-compatibility {
@@ -2215,6 +2469,42 @@
               <div id="scaleNoteGrid" class="scale-note-grid"></div>
               <div id="scaleHint" class="scale-hint"></div>
               <div id="intervalHelp" class="interval-help"></div>
+            </div>
+          </div>
+          <div class="fret-math-panel" aria-labelledby="fretMathTitle">
+            <div class="fret-math-header">
+              <div>
+                <h3 id="fretMathTitle">Fretboard Math</h3>
+                <p>One fret adds one semitone. Pitch-class values wrap from 12 back to 1.</p>
+              </div>
+              <strong class="fret-math-system">A = 1, G#/Ab = 12</strong>
+            </div>
+            <div class="fret-math-controls">
+              <div class="select-group">
+                <label for="fretMathStringSelect">Open string</label>
+                <select id="fretMathStringSelect" aria-label="Choose an open string"></select>
+              </div>
+              <div class="fret-math-range">
+                <label for="fretMathFretRange">Fret</label>
+                <input id="fretMathFretRange" type="range" min="0" max="24" value="5" aria-label="Choose a fret number">
+                <output id="fretMathFretValue" for="fretMathFretRange">5</output>
+              </div>
+            </div>
+            <div class="fret-math-layout">
+              <div>
+                <div id="fretMathWheel" class="fret-math-wheel" role="img" aria-label="Chromatic pitch-class clock"></div>
+                <div class="fret-math-legend" aria-label="Fretboard math legend">
+                  <span class="legend-item"><span class="swatch scale"></span>open string</span>
+                  <span class="legend-item"><span class="swatch" style="background: var(--gold);"></span>frets crossed</span>
+                  <span class="legend-item"><span class="swatch root"></span>result</span>
+                </div>
+              </div>
+              <div class="fret-math-work">
+                <div id="fretMathEquation" class="fret-math-equation" aria-live="polite"></div>
+                <div class="fret-math-strip-wrap">
+                  <div id="fretMathStrip" class="fret-math-strip" aria-label="One-string chromatic fret strip"></div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="scale-view-grid">
@@ -2468,6 +2758,7 @@
                 <strong>Learn the pattern</strong>
                 <span>The highlighted marker is the next note. Use Previous and Next at your own pace.</span>
               </div>
+              <div id="practiceScaleMath" class="fret-math-compact" aria-live="polite"></div>
               <div class="practice-transport">
                 <button id="practiceScaleStartBtn" class="primary" type="button">Start</button>
                 <button id="practiceScalePreviousBtn" type="button">Previous</button>
@@ -2564,6 +2855,7 @@
                     <option value="noteHunt" selected>Note hunt</option>
                     <option value="fretFlash">Name this fret</option>
                     <option value="intervalHunt">Interval hunt</option>
+                    <option value="fretMath">Fret math</option>
                   </select>
                 </div>
                 <div class="select-group">
@@ -2585,6 +2877,7 @@
                     <option value="0-8" selected>Frets 0-8</option>
                     <option value="0-12">Frets 0-12</option>
                     <option value="5-12">Frets 5-12</option>
+                    <option value="0-24">Frets 0-24</option>
                   </select>
                 </div>
                 <div class="select-group">
@@ -2769,6 +3062,7 @@
 
   <script>
     const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const PITCH_CLASS_DISPLAY = ["C", "C#/Db", "D", "D#/Eb", "E", "F", "F#/Gb", "G", "G#/Ab", "A", "A#/Bb", "B"];
     const FLAT_TO_SHARP = { Db: "C#", Eb: "D#", Gb: "F#", Ab: "G#", Bb: "A#", Cb: "B", Fb: "E" };
     const NOTE_LETTERS = ["C", "D", "E", "F", "G", "A", "B"];
     const NATURAL_NOTE_INDEX = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
@@ -2935,6 +3229,12 @@
     const scaleFretboardTitle = document.getElementById("scaleFretboardTitle");
     const scaleFretboardMeta = document.getElementById("scaleFretboardMeta");
     const intervalHelp = document.getElementById("intervalHelp");
+    const fretMathStringSelect = document.getElementById("fretMathStringSelect");
+    const fretMathFretRange = document.getElementById("fretMathFretRange");
+    const fretMathFretValue = document.getElementById("fretMathFretValue");
+    const fretMathWheel = document.getElementById("fretMathWheel");
+    const fretMathEquation = document.getElementById("fretMathEquation");
+    const fretMathStrip = document.getElementById("fretMathStrip");
     const useJamKeyBtn = document.getElementById("useJamKeyBtn");
     const useJamKeyStatus = document.getElementById("useJamKeyStatus");
     const appTabButtons = document.querySelectorAll(".app-tab");
@@ -2976,6 +3276,7 @@
     const practiceScaleExerciseSelect = document.getElementById("practiceScaleExerciseSelect");
     const practiceScaleLabelSelect = document.getElementById("practiceScaleLabelSelect");
     const practiceScalePrompt = document.getElementById("practiceScalePrompt");
+    const practiceScaleMath = document.getElementById("practiceScaleMath");
     const practiceScaleStartBtn = document.getElementById("practiceScaleStartBtn");
     const practiceScalePreviousBtn = document.getElementById("practiceScalePreviousBtn");
     const practiceScaleNextBtn = document.getElementById("practiceScaleNextBtn");
@@ -3023,6 +3324,34 @@
     function noteIndex(note) { return NOTES.indexOf(note); }
     function noteIndexAny(note) { return noteIndex(FLAT_TO_SHARP[note] || note); }
     function noteFromIndex(index) { return NOTES[((index % 12) + 12) % 12]; }
+    function chromaticDisplayName(noteOrPc) {
+      const pc = typeof noteOrPc === "number" ? ((noteOrPc % 12) + 12) % 12 : noteIndexAny(noteOrPc);
+      return PITCH_CLASS_DISPLAY[pc];
+    }
+    function aPitchClassNumber(noteOrPc) {
+      const pc = typeof noteOrPc === "number" ? ((noteOrPc % 12) + 12) % 12 : noteIndexAny(noteOrPc);
+      return ((pc - noteIndexAny("A") + 12) % 12) + 1;
+    }
+    function fretMathCalculation(openNote, fret) {
+      const openNumber = aPitchClassNumber(openNote);
+      const total = openNumber + Number(fret);
+      const wrapped = ((total - 1) % 12) + 1;
+      const resultPc = (noteIndexAny(openNote) + Number(fret)) % 12;
+      return {
+        openNote: chromaticDisplayName(openNote),
+        openNumber: openNumber,
+        fret: Number(fret),
+        total: total,
+        wrapped: wrapped,
+        resultPc: resultPc,
+        resultNote: chromaticDisplayName(resultPc)
+      };
+    }
+    function fretMathEquationText(openNote, fret, hideResult) {
+      const calculation = fretMathCalculation(openNote, fret);
+      if (hideResult) return calculation.openNote + "(" + calculation.openNumber + ") + " + calculation.fret + " frets = ?";
+      return calculation.openNote + "(" + calculation.openNumber + ") + " + calculation.fret + " frets = " + calculation.total + " -> " + calculation.wrapped + " -> " + calculation.resultNote;
+    }
     function currentTuning() { return TUNINGS[tuningSelect.value] || TUNINGS.standard; }
     function openIndexForString(stringKey) { return noteIndexAny(currentTuning().notes[STRING_KEYS.indexOf(stringKey)]); }
     function stringLabel(stringKey) { return currentTuning().labels[STRING_KEYS.indexOf(stringKey)]; }
@@ -3120,6 +3449,52 @@
         </div>
       `;
     }
+    function renderFretMath() {
+      const previousString = fretMathStringSelect.value || "E";
+      fretMathStringSelect.innerHTML = STRING_KEYS.map(function(stringKey, stringIndex) {
+        const openNote = currentTuning().notes[stringIndex];
+        const label = practiceStringName(stringKey) + " - " + chromaticDisplayName(openNote) + " (" + aPitchClassNumber(openNote) + ")";
+        return '<option value="' + stringKey + '">' + escapeHtml(label) + "</option>";
+      }).join("");
+      fretMathStringSelect.value = STRING_KEYS.includes(previousString) ? previousString : "E";
+
+      const stringIndex = STRING_KEYS.indexOf(fretMathStringSelect.value);
+      const openNote = currentTuning().notes[stringIndex];
+      const fret = Number(fretMathFretRange.value);
+      const calculation = fretMathCalculation(openNote, fret);
+      const pathNumbers = new Set();
+      for (let step = 0; step <= fret; step += 1) {
+        pathNumbers.add(((calculation.openNumber - 1 + step) % 12) + 1);
+      }
+
+      const points = Array.from({ length: 12 }, function(_, index) {
+        const number = index + 1;
+        const pc = (noteIndexAny("A") + index) % 12;
+        const angle = index * 30 - 90;
+        const radians = angle * Math.PI / 180;
+        const x = 50 + Math.cos(radians) * 41;
+        const y = 50 + Math.sin(radians) * 41;
+        let className = "fret-math-wheel-point";
+        if (pathNumbers.has(number)) className += " is-path";
+        if (number === calculation.openNumber) className += " is-start";
+        if (number === calculation.wrapped) className += " is-result";
+        return '<span class="' + className + '" style="left:' + x.toFixed(2) + "%;top:" + y.toFixed(2) + '%"><strong>' + number + "</strong><small>" + escapeHtml(chromaticDisplayName(pc)) + "</small></span>";
+      }).join("");
+      fretMathWheel.innerHTML = points + '<div class="fret-math-wheel-center"><strong>' + escapeHtml(calculation.resultNote) + "</strong><span>class " + calculation.wrapped + ", fret " + fret + "</span></div>";
+      fretMathWheel.setAttribute("aria-label", calculation.openNote + " pitch class " + calculation.openNumber + " plus " + fret + " frets equals " + calculation.resultNote + ", pitch class " + calculation.wrapped);
+
+      fretMathEquation.innerHTML = "<strong>" + escapeHtml(fretMathEquationText(openNote, fret, false)) + '</strong><span>((open class - 1 + fret) mod 12) + 1 = ' + calculation.wrapped + "</span>";
+      const lastFret = Math.max(12, fret);
+      fretMathStrip.innerHTML = Array.from({ length: lastFret + 1 }, function(_, cellFret) {
+        const cellCalculation = fretMathCalculation(openNote, cellFret);
+        return '<div class="fret-math-cell' + (cellFret === fret ? " is-selected" : "") + '"><small>fret ' + cellFret + "</small><strong>" + escapeHtml(cellCalculation.resultNote) + "</strong><span>class " + cellCalculation.wrapped + "</span></div>";
+      }).join("");
+      fretMathFretValue.value = String(fret);
+      fretMathFretValue.textContent = String(fret);
+      const stripWrap = fretMathStrip.parentElement;
+      stripWrap.scrollLeft = fret * 68 + 68 > stripWrap.clientWidth ? Math.max(0, fret * 68 - stripWrap.clientWidth / 2 + 34) : 0;
+    }
+
     function fretFor(note, openString, minimum = 0) {
       const target = noteIndexAny(note);
       const open = noteIndexAny(openString);
@@ -3532,6 +3907,12 @@
         const noteLabel = practiceScaleStage === "recall" && index >= practiceScaleIndex ? "?" : position.note;
         return '<span class="' + className + '" title="' + escapeHtml(position.note + " at " + position.fret + "fr") + '"><strong>' + (index + 1) + '</strong><small>' + escapeHtml(noteLabel) + '</small></span>';
       }).join("");
+      if (current) {
+        const openNote = currentTuning().notes[STRING_KEYS.indexOf(current.stringKey)];
+        practiceScaleMath.textContent = fretMathEquationText(openNote, current.fret, practiceScaleStage === "recall");
+      } else {
+        practiceScaleMath.textContent = "";
+      }
       renderPracticeScrollingTab();
       if (practiceCountIn > 0) {
         setPracticePrompt(practiceScalePrompt, "Count in: " + practiceCountIn, "Get your fretting hand ready. The exercise begins after the count.", "");
@@ -3890,6 +4271,34 @@
           targetNote: target.note,
           targetPc: target.pc
         };
+      } else if (drill === "fretMath") {
+        let candidates = [];
+        strings.forEach(function(stringKey) {
+          range.frets.filter(function(fret) { return fret > 0; }).forEach(function(fret) {
+            const note = noteAtStringFret(stringKey, fret);
+            if (practiceFretNotesSelect.value === "chromatic" || NOTE_LETTERS.includes(note)) {
+              candidates.push({
+                stringKey: stringKey,
+                fret: fret,
+                note: note,
+                pc: noteIndexAny(note),
+                openNote: currentTuning().notes[STRING_KEYS.indexOf(stringKey)]
+              });
+            }
+          });
+        });
+        const availableNotes = Array.from(new Set(candidates.map(function(item) { return item.note; })));
+        const preferredNote = preferWeak ? weakestPracticeNote(availableNotes) : null;
+        const candidatePool = preferredNote ? candidates.filter(function(item) { return item.note === preferredNote; }) : candidates;
+        const target = randomPracticeItem(candidatePool);
+        practiceFretChallenge = {
+          drill: drill,
+          stringKey: target.stringKey,
+          fret: target.fret,
+          targetNote: target.note,
+          targetPc: target.pc,
+          openNote: target.openNote
+        };
       } else if (drill === "intervalHunt") {
         const stringKey = randomPracticeItem(strings);
         const possible = [];
@@ -3937,7 +4346,12 @@
     function drawFretPractice() {
       if (!practiceFretChallenge) return;
       const challenge = practiceFretChallenge;
-      const range = parsePracticeFretRange();
+      const selectedRange = parsePracticeFretRange();
+      const range = challenge.drill === "fretMath" ? {
+        start: 0,
+        end: selectedRange.end,
+        frets: Array.from({ length: selectedRange.end + 1 }, function(_, index) { return index; })
+      } : selectedRange;
       const markers = [];
       const targetKeys = [];
       if (challenge.drill === "noteHunt") {
@@ -3959,6 +4373,23 @@
           fret: challenge.fret,
           label: practiceFretRevealed ? challenge.targetNote : "?",
           className: practiceFretRevealed ? "root" : "practice-anchor",
+          revealed: true
+        });
+      } else if (challenge.drill === "fretMath") {
+        const calculation = fretMathCalculation(challenge.openNote, challenge.fret);
+        targetKeys.push(practicePositionKey(challenge.stringKey, challenge.fret));
+        markers.push({
+          stringKey: challenge.stringKey,
+          fret: 0,
+          label: calculation.openNumber + "/" + calculation.openNote,
+          className: "practice-anchor practice-combined",
+          revealed: true
+        });
+        markers.push({
+          stringKey: challenge.stringKey,
+          fret: challenge.fret,
+          label: practiceFretRevealed ? calculation.wrapped + "/" + calculation.resultNote : "?",
+          className: (practiceFretRevealed ? "root " : "scale ") + "practice-combined",
           revealed: true
         });
       } else {
@@ -3983,17 +4414,41 @@
         targetKeys: targetKeys,
         onClick: handleFretPracticeCell
       });
-      practiceFretAnswers.hidden = challenge.drill !== "fretFlash";
+
+      const usesAnswers = challenge.drill === "fretFlash" || challenge.drill === "fretMath";
+      practiceFretAnswers.hidden = !usesAnswers;
+      practiceFretAnswers.innerHTML = "";
       if (challenge.drill === "fretFlash") {
         practiceFretAnswers.innerHTML = NOTES.map(function(note) {
-          return '<button type="button" data-note="' + note + '">' + note + '</button>';
+          return '<button type="button" data-note="' + note + '">' + note + "</button>";
         }).join("");
         practiceFretAnswers.querySelectorAll("button").forEach(function(button) {
           button.addEventListener("click", function() { answerFretFlash(button.dataset.note); });
         });
+      } else if (challenge.drill === "fretMath") {
+        practiceFretAnswers.innerHTML = Array.from({ length: 12 }, function(_, index) {
+          const number = index + 1;
+          const pc = (noteIndexAny("A") + index) % 12;
+          return '<button class="math-answer" type="button" data-pc="' + pc + '"><strong>' + number + "</strong><span>" + escapeHtml(chromaticDisplayName(pc)) + "</span></button>";
+        }).join("");
+        practiceFretAnswers.querySelectorAll("button").forEach(function(button) {
+          button.addEventListener("click", function() { answerFretMath(Number(button.dataset.pc)); });
+        });
+      }
+
+      if (challenge.drill === "fretFlash") {
         practiceFretboardTitle.textContent = "Name This Fret";
         practiceFretboardMeta.textContent = currentTuning().name + ", frets " + range.start + "-" + range.end;
         setPracticePrompt(practiceFretPrompt, "Name the highlighted position", practiceStringName(challenge.stringKey) + " string at fret " + challenge.fret + ".", "");
+      } else if (challenge.drill === "fretMath") {
+        const calculation = fretMathCalculation(challenge.openNote, challenge.fret);
+        practiceFretboardTitle.textContent = "Fret Math";
+        practiceFretboardMeta.textContent = currentTuning().name + ", challenge frets " + selectedRange.start + "-" + selectedRange.end;
+        if (practiceFretRevealed) {
+          setPracticePrompt(practiceFretPrompt, "Answer: " + calculation.resultNote, fretMathEquationText(challenge.openNote, challenge.fret, false), "success");
+        } else {
+          setPracticePrompt(practiceFretPrompt, calculation.openNote + " (" + calculation.openNumber + ") + " + challenge.fret + " frets", "Choose the resulting pitch class and note.", "");
+        }
       } else if (challenge.drill === "intervalHunt") {
         practiceFretboardTitle.textContent = "Interval Hunt";
         practiceFretboardMeta.textContent = currentTuning().name + ", frets " + range.start + "-" + range.end;
@@ -4004,10 +4459,9 @@
         setPracticePrompt(practiceFretPrompt, "Find " + challenge.targetNote, "Tap " + challenge.targetNote + " on the " + practiceStringName(challenge.stringKey) + " string.", "");
       }
     }
-
     function handleFretPracticeCell(position) {
       const challenge = practiceFretChallenge;
-      if (!challenge || challenge.drill === "fretFlash") return;
+      if (!challenge || challenge.drill === "fretFlash" || challenge.drill === "fretMath") return;
       let correct = false;
       if (challenge.drill === "noteHunt") {
         correct = position.stringKey === challenge.stringKey && challenge.validFrets.includes(position.fret);
@@ -4035,6 +4489,19 @@
         setPracticePrompt(practiceFretPrompt, "Correct: " + challenge.targetNote, practiceStringName(challenge.stringKey) + " string, fret " + challenge.fret + ".", "success");
       } else {
         setPracticePrompt(practiceFretPrompt, "Not " + note, "Count upward from the open-string note and try again.", "error");
+      }
+    }
+
+    function answerFretMath(pc) {
+      const challenge = practiceFretChallenge;
+      if (!challenge || challenge.drill !== "fretMath") return;
+      const correct = pc === challenge.targetPc;
+      recordPracticeAttempt("fretboard", correct, challenge.targetNote);
+      if (correct) {
+        practiceFretRevealed = true;
+        drawFretPractice();
+      } else {
+        setPracticePrompt(practiceFretPrompt, "Not " + chromaticDisplayName(pc), "Start at pitch class " + aPitchClassNumber(challenge.openNote) + " and add one for each fret.", "error");
       }
     }
 
@@ -4582,10 +5049,10 @@
       renderMoveableChords();
       renderBluesFretboard();
       renderCircleScale();
+      renderFretMath();
       renderCaged();
       renderBeats();
-    }
-    tuningSelect.addEventListener("change", function() {
+    }    tuningSelect.addEventListener("change", function() {
       rerenderAll();
       resetPracticeScale();
       resetPracticeCaged();
@@ -4605,6 +5072,8 @@
         drawPracticeScale();
       }
     });
+    fretMathStringSelect.addEventListener("change", renderFretMath);
+    fretMathFretRange.addEventListener("input", renderFretMath);
     playBtn.addEventListener("click", () => setPlaying(!playing));
     nextBtn.addEventListener("click", () => {
       currentBar = (currentBar + 1) % 12;
