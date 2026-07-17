@@ -21,6 +21,8 @@ The app is organized into four top-level sections:
 
 - Choose a root note and scale/mode.
 - See scale notes, interval numbers, formulas, and note functions.
+- Build the selected seven-note scale into diatonic triads or seventh chords.
+- Learn major, minor, perfect, diminished, and augmented intervals plus common chord symbols.
 - Explore common, rare, and exotic scales.
 - View the selected scale on a horizontal fretboard.
 - Use the circle of fifths to see major, minor, diminished, augmented, and selected-scale relationships.

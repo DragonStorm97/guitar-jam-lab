@@ -1299,6 +1299,175 @@
       background: var(--gold);
     }
 
+    .scale-chord-help {
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .scale-chord-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .scale-chord-header h4,
+    .scale-chord-header p {
+      margin: 0;
+    }
+
+    .scale-chord-header h4 {
+      font-size: 1rem;
+    }
+
+    .scale-chord-header p,
+    .chord-build-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.45;
+    }
+
+    .scale-chord-header p {
+      margin-top: 4px;
+      max-width: 720px;
+    }
+
+    .chord-size-toggle {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(90px, 1fr));
+      flex: 0 0 auto;
+    }
+
+    .chord-size-button {
+      min-height: 34px;
+      padding: 7px 10px;
+      border-radius: 0;
+      font-size: 0.78rem;
+    }
+
+    .chord-size-button:first-child {
+      border-radius: 8px 0 0 8px;
+    }
+
+    .chord-size-button:last-child {
+      margin-left: -1px;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .chord-size-button.active {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+      color: #084a45;
+    }
+
+    .chord-family-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+      gap: 8px;
+    }
+
+    .chord-family-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-top: 3px solid #7e8a97;
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 10px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .chord-family-card.major { border-top-color: var(--red); }
+    .chord-family-card.minor { border-top-color: var(--teal); }
+    .chord-family-card.diminished { border-top-color: #586579; }
+    .chord-family-card.augmented { border-top-color: #b66b15; }
+
+    .chord-family-card .roman {
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .chord-family-card strong {
+      font-size: 1rem;
+    }
+
+    .chord-tone-line {
+      overflow-wrap: anywhere;
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .chord-quality-label {
+      color: var(--muted);
+      font-size: 0.72rem;
+      line-height: 1.3;
+    }
+
+    .chord-build-note {
+      margin: 0;
+    }
+
+    .interval-quality-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .interval-quality {
+      min-width: 0;
+      border-left: 3px solid var(--gold);
+      background: #fffdf8;
+      padding: 8px 9px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .interval-quality b {
+      font-size: 0.84rem;
+    }
+
+    .interval-quality span,
+    .interval-quality small {
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.35;
+    }
+
+    .interval-quality small {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .interval-symbol-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 7px;
+    }
+
+    .interval-symbol {
+      border: 1px solid #e3d8c7;
+      border-radius: 8px;
+      background: #fffdf8;
+      padding: 8px;
+      display: grid;
+      gap: 2px;
+    }
+
+    .interval-symbol b {
+      font-size: 0.82rem;
+    }
+
+    .interval-symbol span {
+      color: var(--muted);
+      font-size: 0.73rem;
+      line-height: 1.3;
+    }
+
     .interval-help {
       margin-top: 12px;
       border: 1px solid var(--line);
@@ -2335,6 +2504,18 @@
         grid-template-columns: 1fr;
       }
 
+      .scale-chord-header {
+        flex-direction: column;
+      }
+
+      .chord-size-toggle {
+        width: 100%;
+      }
+
+      .interval-quality-grid {
+        grid-template-columns: 1fr;
+      }
+
       .practice-answer-grid {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
@@ -2468,6 +2649,7 @@
               <div class="formula-strip" id="scaleFormula"></div>
               <div id="scaleNoteGrid" class="scale-note-grid"></div>
               <div id="scaleHint" class="scale-hint"></div>
+              <div id="scaleChordHelp" class="scale-chord-help"></div>
               <div id="intervalHelp" class="interval-help"></div>
             </div>
           </div>
@@ -3153,6 +3335,7 @@
 
     let selectedKey = "A";
     let selectedScaleCategory = "common";
+    let scaleChordSize = 3;
     let currentBar = 0;
     let beat = 0;
     let playing = false;
@@ -3224,6 +3407,7 @@
     const scaleFormula = document.getElementById("scaleFormula");
     const scaleNoteGrid = document.getElementById("scaleNoteGrid");
     const scaleHint = document.getElementById("scaleHint");
+    const scaleChordHelp = document.getElementById("scaleChordHelp");
     const scaleFretboard = document.getElementById("scaleFretboard");
     const scaleFretNumbers = document.getElementById("scaleFretNumbers");
     const scaleFretboardTitle = document.getElementById("scaleFretboardTitle");
@@ -3429,23 +3613,121 @@
         };
       });
     }
-    function renderIntervalHelp(scale) {
+    function chordIdentity(tones, degree) {
+      const rootTone = tones[0];
+      const rootPc = rootTone.pc;
+      const third = (tones[1].pc - rootPc + 12) % 12;
+      const fifth = (tones[2].pc - rootPc + 12) % 12;
+      const quality = qualityForTriad(third, fifth);
+      const triadName = quality === "major" ? rootTone.note : quality === "minor" ? rootTone.note + "m" : quality === "diminished" ? rootTone.note + "dim" : quality === "augmented" ? rootTone.note + "aug" : rootTone.note + " chord";
+      const triadRoman = romanForDegree(degree, quality);
+      if (tones.length < 4) {
+        return { name: triadName, roman: triadRoman, quality, label: QUALITY_NAMES[quality] || "Scale-tone chord" };
+      }
+      const seventh = (tones[3].pc - rootPc + 12) % 12;
+      if (quality === "major" && seventh === 11) return { name: rootTone.note + "maj7", roman: triadRoman + "maj7", quality, label: "Major seventh" };
+      if (quality === "major" && seventh === 10) return { name: rootTone.note + "7", roman: triadRoman + "7", quality, label: "Dominant seventh" };
+      if (quality === "minor" && seventh === 10) return { name: rootTone.note + "m7", roman: triadRoman + "7", quality, label: "Minor seventh" };
+      if (quality === "minor" && seventh === 11) return { name: rootTone.note + "m(maj7)", roman: triadRoman + "(maj7)", quality, label: "Minor-major seventh" };
+      if (quality === "diminished" && seventh === 10) return { name: rootTone.note + "m7b5", roman: triadRoman.replace("°", "ø") + "7", quality, label: "Half-diminished seventh" };
+      if (quality === "diminished" && seventh === 9) return { name: rootTone.note + "dim7", roman: triadRoman + "7", quality, label: "Diminished seventh" };
+      if (quality === "augmented" && seventh === 11) return { name: rootTone.note + "maj7#5", roman: triadRoman + "maj7", quality, label: "Augmented major seventh" };
+      if (quality === "augmented" && seventh === 10) return { name: rootTone.note + "7#5", roman: triadRoman + "7", quality, label: "Augmented dominant seventh" };
+      return { name: triadName + " add " + INTERVAL_LABELS[seventh], roman: triadRoman + "(" + INTERVAL_LABELS[seventh] + ")", quality, label: "Scale-tone seventh chord" };
+    }
+    function chordCard(identity, tones) {
+      return `<div class="chord-family-card ${escapeHtml(identity.quality)}"><span class="roman">${escapeHtml(identity.roman)}</span><strong>${escapeHtml(identity.name)}</strong><span class="chord-tone-line">${tones.map(tone => escapeHtml(tone.note)).join(" - ")}</span><span class="chord-quality-label">${escapeHtml(identity.label)}</span></div>`;
+    }
+    function renderScaleChordHelp(root, scale, notes) {
+      const isSevenNoteScale = notes.length === 7;
+      let cards = "";
+      let note = "";
+      if (isSevenNoteScale) {
+        cards = notes.map((scaleNote, index) => {
+          const tones = Array.from({ length: scaleChordSize }, (_, toneIndex) => notes[(index + toneIndex * 2) % notes.length]);
+          return chordCard(chordIdentity(tones, scaleNote.degree), tones);
+        }).join("");
+        note = scaleChordSize === 3
+          ? "Each card takes a root, skips the next scale note, then takes the following note twice: root, third, fifth."
+          : "A seventh chord continues the same every-other-note pattern once more: root, third, fifth, seventh.";
+      } else {
+        const pick = choices => choices.map(choice => notes.find(item => item.degree === choice)).find(Boolean);
+        const rootTone = notes.find(item => item.degree === "1");
+        const thirdTone = pick(["3", "b3"]);
+        const fifthTone = pick(["5", "b5", "#5"]);
+        const seventhTone = scaleChordSize === 4 ? pick(["7", "b7"]) : null;
+        const available = [rootTone, thirdTone, fifthTone, seventhTone].filter(Boolean);
+        const hasTriad = Boolean(thirdTone && fifthTone);
+        const identity = hasTriad ? chordIdentity(available, "1") : { name: root + " color tones", roman: "I", quality: "scale", label: "Not a complete standard chord" };
+        cards = chordCard(identity, available);
+        const missing = [];
+        if (!thirdTone) missing.push("3rd");
+        if (!fifthTone) missing.push("5th");
+        if (scaleChordSize === 4 && !seventhTone) missing.push("7th");
+        note = `${scale.name} has ${notes.length} notes, so it does not generate the usual seven-chord diatonic family. Use it as a melody and color set over compatible chords.${missing.length ? " It does not contain a chord-defining " + missing.join(" or ") + "." : " The tonic chord tones available inside it are shown here."}`;
+      }
+      scaleChordHelp.innerHTML = `
+        <div class="scale-chord-header">
+          <div>
+            <h4>How chords come from ${escapeHtml(root)} ${escapeHtml(scale.name)}</h4>
+            <p>Start on a scale note and stack every other scale note. Triads use three stacked notes; seventh chords add one more.</p>
+          </div>
+          <div class="chord-size-toggle" role="group" aria-label="Chord size">
+            <button class="chord-size-button${scaleChordSize === 3 ? " active" : ""}" type="button" data-chord-size="3" aria-pressed="${scaleChordSize === 3}">Triads</button>
+            <button class="chord-size-button${scaleChordSize === 4 ? " active" : ""}" type="button" data-chord-size="4" aria-pressed="${scaleChordSize === 4}">7th chords</button>
+          </div>
+        </div>
+        <div class="chord-family-grid">${cards}</div>
+        <p class="chord-build-note">${escapeHtml(note)}</p>
+      `;
+      scaleChordHelp.querySelectorAll("[data-chord-size]").forEach(button => {
+        button.addEventListener("click", () => {
+          scaleChordSize = Number(button.dataset.chordSize);
+          renderScaleChordHelp(root, scale, notes);
+        });
+      });
+    }
+    function renderIntervalHelp(scale, root) {
       const activeDegrees = new Set(scale.degrees);
       const items = [
-        ["b2", "2 lowered one fret"],
-        ["b3", "minor third"],
-        ["b5", "flat fifth / blue note"],
-        ["b6", "minor sixth"],
-        ["b7", "minor seventh"],
-        ["3", "major third"],
-        ["5", "perfect fifth"],
-        ["#4", "4 raised one fret"]
+        ["b2", "minor 2nd: 2 lowered one fret"],
+        ["b3", "minor 3rd: 3 lowered one fret"],
+        ["b5", "diminished 5th / blue note"],
+        ["b6", "minor 6th: 6 lowered one fret"],
+        ["b7", "minor 7th: 7 lowered one fret"],
+        ["3", "major 3rd"],
+        ["5", "perfect 5th"],
+        ["#4", "augmented 4th: 4 raised one fret"]
+      ];
+      const qualities = [
+        ["Major", "Used with 2nds, 3rds, 6ths, and 7ths. The plain number is the major form.", `Major 3rd: ${root} - ${spellScaleNote(root, "3", 4)}`],
+        ["Minor", "A major 2nd, 3rd, 6th, or 7th lowered by one semitone. It is written with b in scale formulas.", `Minor 3rd: ${root} - ${spellScaleNote(root, "b3", 3)}`],
+        ["Perfect", "1sts, 4ths, 5ths, and octaves use perfect instead of major or minor.", `Perfect 5th: ${root} - ${spellScaleNote(root, "5", 7)}`],
+        ["Diminished", "One semitone smaller than a perfect or minor interval. A diminished chord stacks a minor 3rd and b5.", `Diminished 5th: ${root} - ${spellScaleNote(root, "b5", 6)}`],
+        ["Augmented", "One semitone larger than a perfect or major interval. # means the scale degree moved up one fret.", `Augmented 4th: ${root} - ${spellScaleNote(root, "#4", 6)}`]
+      ];
+      const symbols = [
+        ["No suffix", "A letter alone usually means a major triad: C = C major."],
+        ["m", "Minor triad: Cm uses 1, b3, 5."],
+        ["maj7", "Major triad plus a major 7th: Cmaj7 uses 1, 3, 5, 7."],
+        ["7", "Dominant seventh: C7 uses 1, 3, 5, b7."],
+        ["dim or °", "Diminished triad: 1, b3, b5."],
+        ["aug or +", "Augmented triad: 1, 3, #5."],
+        ["m7b5 or ø", "Half-diminished seventh: 1, b3, b5, b7."]
       ];
       intervalHelp.innerHTML = `
         <strong>Reading the interval numbers</strong>
-        <p>The number is the scale degree counted from the root. <b>b</b> means lower that degree by one semitone, and <b>#</b> means raise it by one semitone. On guitar, one semitone is one fret.</p>
+        <p>The number counts note letters from the root; the quality tells you the exact fret distance. <b>b</b> lowers a degree one semitone and <b>#</b> raises it one semitone. On guitar, one semitone is one fret.</p>
         <div class="interval-key-grid">
           ${items.map(item => `<div class="interval-key${activeDegrees.has(item[0]) ? " active" : ""}"><b>${escapeHtml(item[0])}</b><span>${escapeHtml(item[1])}</span></div>`).join("")}
+        </div>
+        <strong>Interval qualities</strong>
+        <div class="interval-quality-grid">
+          ${qualities.map(item => `<div class="interval-quality"><b>${escapeHtml(item[0])}</b><span>${escapeHtml(item[1])}</span><small>${escapeHtml(item[2])}</small></div>`).join("")}
+        </div>
+        <strong>Common chord symbols</strong>
+        <div class="interval-symbol-grid">
+          ${symbols.map(item => `<div class="interval-symbol"><b>${escapeHtml(item[0])}</b><span>${escapeHtml(item[1])}</span></div>`).join("")}
         </div>
       `;
     }
@@ -4947,7 +5229,8 @@
         return `<div class="scale-note-card ${cardClass}"><div class="scale-degree">${item.step}. degree ${escapeHtml(item.degree)}</div><div class="scale-note-name">${escapeHtml(item.note)}</div><div class="scale-note-meta">+${item.offset} semitones</div></div>`;
       }).join("");
       scaleHint.textContent = scale.hint(root);
-      renderIntervalHelp(scale);
+      renderScaleChordHelp(root, scale, notes);
+      renderIntervalHelp(scale, root);
       scaleFretboardTitle.textContent = `${root} ${scale.name} Fretboard`;
       scaleFretboardMeta.textContent = `${currentTuning().name}, ${SHAPE_LABELS[shape]} shape`;
       renderFretboardGrid(scaleFretboard, scaleFretNumbers, root, scale, shape);
