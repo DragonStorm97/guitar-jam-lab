@@ -3523,9 +3523,14 @@
     const TUNINGS_BY_STRINGS = {
       6: {
         standard: { name: "Standard", lowMidi: 40, notes: ["E", "A", "D", "G", "B", "E"], labels: ["E", "A", "D", "G", "B", "e"] },
+        halfStepDown: { name: "Half-step down", lowMidi: 39, notes: ["Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["Eb", "Ab", "Db", "Gb", "Bb", "eb"] },
+        fullStepDown: { name: "Full-step down", lowMidi: 38, notes: ["D", "G", "C", "F", "A", "D"], labels: ["D", "G", "C", "F", "A", "d"] },
+        twoStepsDown: { name: "Two steps down", lowMidi: 36, notes: ["C", "F", "Bb", "Eb", "G", "C"], labels: ["C", "F", "Bb", "Eb", "G", "c"] },
         dropD: { name: "Drop D", lowMidi: 38, notes: ["D", "A", "D", "G", "B", "E"], labels: ["D", "A", "D", "G", "B", "e"] },
         dropC: { name: "Drop C", lowMidi: 36, notes: ["C", "G", "C", "F", "A", "D"], labels: ["C", "G", "C", "F", "A", "d"] },
-        halfStepDown: { name: "Half-step down", lowMidi: 39, notes: ["Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["Eb", "Ab", "Db", "Gb", "Bb", "eb"] },
+        dropB: { name: "Drop B", lowMidi: 35, notes: ["B", "F#", "B", "E", "G#", "C#"], labels: ["B", "F#", "B", "E", "G#", "c#"] },
+        dropBb: { name: "Drop Bb", lowMidi: 34, notes: ["Bb", "F", "Bb", "Eb", "G", "C"], labels: ["Bb", "F", "Bb", "Eb", "G", "c"] },
+        dropA: { name: "Drop A", lowMidi: 33, notes: ["A", "E", "A", "D", "F#", "B"], labels: ["A", "E", "A", "D", "F#", "b"] },
         bStandard: { name: "B standard (baritone)", lowMidi: 35, notes: ["B", "E", "A", "D", "F#", "B"], labels: ["B", "E", "A", "D", "F#", "b"] },
         fSharpStandard: { name: "F# standard (baritone)", lowMidi: 30, notes: ["F#", "B", "E", "A", "C#", "F#"], labels: ["F#", "B", "E", "A", "C#", "f#"] },
         dadgad: { name: "DADGAD", lowMidi: 38, notes: ["D", "A", "D", "G", "A", "D"], labels: ["D", "A", "D", "G", "A", "d"] },
@@ -3534,18 +3539,24 @@
       },
       7: {
         standard: { name: "Standard", lowMidi: 35, notes: ["B", "E", "A", "D", "G", "B", "E"], labels: ["B", "E", "A", "D", "G", "B", "e"] },
-        dropLowest: { name: "Drop A", lowMidi: 33, notes: ["A", "E", "A", "D", "G", "B", "E"], labels: ["A", "E", "A", "D", "G", "B", "e"] },
-        halfStepDown: { name: "Half-step down", lowMidi: 34, notes: ["Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] }
+        halfStepDown: { name: "Half-step down", lowMidi: 34, notes: ["Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] },
+        fullStepDown: { name: "Full-step down", lowMidi: 33, notes: ["A", "D", "G", "C", "F", "A", "D"], labels: ["A", "D", "G", "C", "F", "A", "d"] },
+        twoStepsDown: { name: "Two steps down", lowMidi: 31, notes: ["G", "C", "F", "Bb", "Eb", "G", "C"], labels: ["G", "C", "F", "Bb", "Eb", "G", "c"] },
+        dropLowest: { name: "Drop A", lowMidi: 33, notes: ["A", "E", "A", "D", "G", "B", "E"], labels: ["A", "E", "A", "D", "G", "B", "e"] }
       },
       8: {
         standard: { name: "Standard", lowMidi: 30, notes: ["F#", "B", "E", "A", "D", "G", "B", "E"], labels: ["F#", "B", "E", "A", "D", "G", "B", "e"] },
-        dropLowest: { name: "Drop E", lowMidi: 28, notes: ["E", "B", "E", "A", "D", "G", "B", "E"], labels: ["E", "B", "E", "A", "D", "G", "B", "e"] },
-        halfStepDown: { name: "Half-step down", lowMidi: 29, notes: ["F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] }
+        halfStepDown: { name: "Half-step down", lowMidi: 29, notes: ["F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] },
+        fullStepDown: { name: "Full-step down", lowMidi: 28, notes: ["E", "A", "D", "G", "C", "F", "A", "D"], labels: ["E", "A", "D", "G", "C", "F", "A", "d"] },
+        twoStepsDown: { name: "Two steps down", lowMidi: 26, notes: ["D", "G", "C", "F", "Bb", "Eb", "G", "C"], labels: ["D", "G", "C", "F", "Bb", "Eb", "G", "c"] },
+        dropLowest: { name: "Drop E", lowMidi: 28, notes: ["E", "B", "E", "A", "D", "G", "B", "E"], labels: ["E", "B", "E", "A", "D", "G", "B", "e"] }
       },
       9: {
         standard: { name: "Standard", lowMidi: 25, notes: ["C#", "F#", "B", "E", "A", "D", "G", "B", "E"], labels: ["C#", "F#", "B", "E", "A", "D", "G", "B", "e"] },
-        dropLowest: { name: "Drop B", lowMidi: 23, notes: ["B", "F#", "B", "E", "A", "D", "G", "B", "E"], labels: ["B", "F#", "B", "E", "A", "D", "G", "B", "e"] },
-        halfStepDown: { name: "Half-step down", lowMidi: 24, notes: ["C", "F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["C", "F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] }
+        halfStepDown: { name: "Half-step down", lowMidi: 24, notes: ["C", "F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["C", "F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] },
+        fullStepDown: { name: "Full-step down", lowMidi: 23, notes: ["B", "E", "A", "D", "G", "C", "F", "A", "D"], labels: ["B", "E", "A", "D", "G", "C", "F", "A", "d"] },
+        twoStepsDown: { name: "Two steps down", lowMidi: 21, notes: ["A", "D", "G", "C", "F", "Bb", "Eb", "G", "C"], labels: ["A", "D", "G", "C", "F", "Bb", "Eb", "G", "c"] },
+        dropLowest: { name: "Drop B", lowMidi: 23, notes: ["B", "F#", "B", "E", "A", "D", "G", "B", "E"], labels: ["B", "F#", "B", "E", "A", "D", "G", "B", "e"] }
       }
     };
     const HARMONY_TYPES = {
@@ -4709,13 +4720,13 @@
     }
     function cagedTuningCompatibility() {
       const tuningKey = tuningSelect.value;
-      if (tuningKey === "standard" || tuningKey === "halfStepDown" || (selectedStringCount > 6 && tuningKey === "dropLowest")) {
+      if (["standard", "halfStepDown", "fullStepDown", "twoStepsDown"].includes(tuningKey) || (selectedStringCount > 6 && tuningKey === "dropLowest")) {
         return {
           level: "full",
           message: instrumentLabel() + " preserves the standard six-string layout on its highest six strings."
         };
       }
-      if (selectedStringCount === 6 && (tuningKey === "dropD" || tuningKey === "dropC")) {
+      if (selectedStringCount === 6 && ["dropD", "dropC", "dropB", "dropBb", "dropA"].includes(tuningKey)) {
         return {
           level: "partial",
           message: instrumentLabel() + " changes the lowest core string. Practice uses the upper five strings; switch to Standard for full E- and G-shape roots."

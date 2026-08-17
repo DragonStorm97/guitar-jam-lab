@@ -35,18 +35,19 @@ The string-count and tuning selectors update the fretboards, notes, chords, tabs
 Included six-string tunings:
 
 - Standard
+- Half-step down, full-step down, and two steps down
 - Drop D
 - Drop C
-- Half-step down
+- Drop B, Drop Bb, and Drop A
 - DADGAD
 - Open G
 - Open D
 
 Extended-range options include:
 
-- Seven-string Standard, Drop A, and half-step down
-- Eight-string Standard, Drop E, and half-step down
-- Nine-string Standard, Drop B, and half-step down
+- Seven-string Standard, Drop A, half-step down, full-step down, and two steps down
+- Eight-string Standard, Drop E, half-step down, full-step down, and two steps down
+- Nine-string Standard, Drop B, half-step down, full-step down, and two steps down
 - Six-string B standard and F# standard baritone references
 
 The **Tunings** tab aligns two instruments by pitch and highlights exact shared strings, matching low strings, pitch range, and whether familiar shapes transfer directly. Its worked examples include the exact upper-string relationship between six-string Standard and eight-string Standard, plus the relationship between baritone and extended-range layouts.
