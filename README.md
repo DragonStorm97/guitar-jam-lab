@@ -8,12 +8,13 @@ Live site: https://dragonstorm97.github.io/guitar-jam-lab/
 
 Guitar Jam Lab is a single-page static web app. It is meant for guitarists who can already noodle a bit and want a practical way to connect fretboard shapes, notes, intervals, harmony, and jam-friendly patterns.
 
-The app is organized into four top-level sections:
+The app is organized into five top-level sections:
 
 - **Scales**: circle of fifths, scale generator, interval explanations, fretboard view, harmony builder, and generated tab charts.
 - **CAGED**: movable C/A/G/E/D chord-shape exploration on a fretboard.
 - **Practice**: guided scale paths, CAGED drills, fretboard note recall, tempo practice, and saved progress.
 - **Blues Lab**: 12-bar blues form, A7/D7/E7 chord shapes, movable dominant 7 shapes, transpose map, blues boxes, and practice prompts.
+- **Tunings**: side-by-side tuning comparison across six-, seven-, eight-, and nine-string guitars.
 
 ## Features
 
@@ -29,9 +30,9 @@ The app is organized into four top-level sections:
 
 ### Tunings
 
-The tuning selector updates the fretboards, notes, chords, and tab views across the app.
+The string-count and tuning selectors update the fretboards, notes, chords, tabs, harmony parts, and practice drills across the app. Choose a six-, seven-, eight-, or nine-string instrument, then pick one of its common tunings.
 
-Included tunings:
+Included six-string tunings:
 
 - Standard
 - Drop D
@@ -40,6 +41,15 @@ Included tunings:
 - DADGAD
 - Open G
 - Open D
+
+Extended-range options include:
+
+- Seven-string Standard, Drop A, and half-step down
+- Eight-string Standard, Drop E, and half-step down
+- Nine-string Standard, Drop B, and half-step down
+- Six-string B standard and F# standard baritone references
+
+The **Tunings** tab aligns two instruments by pitch and highlights exact shared strings, matching low strings, pitch range, and whether familiar shapes transfer directly. Its worked examples include the exact upper-string relationship between six-string Standard and eight-string Standard, plus the relationship between baritone and extended-range layouts.
 
 ### Harmony Builder
 
@@ -81,13 +91,13 @@ The Practice tab turns the reference diagrams into short, repeatable exercises:
 
 - Learn, play, and recall compact scale patterns.
 - Practise scales up and down, in groups of three, in thirds, or by targeting roots.
-- Follow the exercise in a six-string scrolling tab with a fixed playhead.
+- Follow the exercise in a scrolling tab with a fixed playhead and the active number of strings.
 - Use the global tempo with a four-count lead-in.
 - Hunt CAGED roots, build chord tones, recall shapes, and connect adjacent shapes.
 - Train note names and intervals with fretboard prompts.
 - Calculate fretboard notes with pitch-class arithmetic across fret ranges 0-5, 0-12, and 0-24.
 - Focus on weak notes and keep accuracy and completion progress in local browser storage.
-- Use full CAGED drills in Standard and half-step-down tunings, or upper-five-string drills in Drop D and Drop C.
+- Use CAGED on its familiar upper six strings; added extended-range strings are shown muted so the original shapes stay legible.
 
 ### Blues Lab
 
@@ -103,13 +113,14 @@ The Blues Lab focuses on practical jamming:
 
 ## How To Use It
 
-1. Pick a tuning and tempo from the top bar.
+1. Pick a string count, tuning, and tempo from the top bar.
 2. Open the **Scales** tab and choose a root and scale.
 3. Use the fretboard and tab chart to find playable positions.
 4. Try the **Harmony Builder** to create a second-guitar part from the same scale.
 5. Open **CAGED** to connect chord shapes to the same key.
 6. Use **Practice** for guided scale, CAGED, and fretboard recall drills.
-7. Open **Blues Lab** when you want a focused 12-bar jam practice setup.
+7. Open **Tunings** to compare instrument ranges and find reusable string layouts.
+8. Open **Blues Lab** when you want a focused 12-bar jam practice setup.
 
 ## Technical Notes
 

@@ -329,7 +329,7 @@
 
     .beat-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 8px;
     }
 
@@ -409,7 +409,7 @@
     }
 
     svg.chord-svg {
-      width: min(100%, 190px);
+      width: min(100%, 260px);
       height: auto;
       overflow: visible;
     }
@@ -512,9 +512,9 @@
 
     .tab-staff-grid {
       display: grid;
-      grid-template-columns: 34px minmax(var(--lane-width), 1fr);
+      grid-template-columns: 46px minmax(var(--lane-width), 1fr);
       row-gap: 2px;
-      min-width: calc(var(--lane-width) + 34px);
+      min-width: calc(var(--lane-width) + 46px);
       align-items: center;
     }
 
@@ -703,6 +703,21 @@
       height: 2px;
       background: rgba(55, 48, 40, 0.45);
       transform: translateY(-50%);
+    }
+
+    .fretboard .string-label.extended-muted,
+    .fretboard .cell.extended-muted {
+      background: #eee9e0;
+      color: #7b746b;
+    }
+
+    .fretboard .cell.extended-muted::after {
+      content: "x";
+      position: relative;
+      z-index: 1;
+      color: #8b847b;
+      font-size: 0.72rem;
+      font-weight: 900;
     }
 
     .marker {
@@ -1824,6 +1839,163 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
     }
+
+    .tuning-compare-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tuning-compare-side {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tuning-compare-side strong {
+      font-size: 0.9rem;
+    }
+
+    .tuning-compare-selects {
+      display: grid;
+      grid-template-columns: minmax(100px, 0.35fr) minmax(170px, 1fr);
+      gap: 8px;
+    }
+
+    .tuning-compare-result {
+      margin-top: 14px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .tuning-match-summary {
+      border-left: 4px solid var(--teal);
+      background: var(--teal-soft);
+      padding: 12px 14px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .tuning-match-summary strong {
+      font-size: 1rem;
+    }
+
+    .tuning-match-summary span {
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .tuning-string-comparison {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tuning-string-row {
+      display: grid;
+      grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tuning-string-row > span {
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .tuning-note-lane {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tuning-note-cell {
+      min-width: 52px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffdf8;
+      padding: 7px 8px;
+      display: grid;
+      gap: 1px;
+      text-align: center;
+    }
+
+    .tuning-note-cell.match-high {
+      border-color: var(--teal);
+      background: var(--teal-soft);
+    }
+
+    .tuning-note-cell.match-low {
+      border-color: var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .tuning-note-cell strong {
+      font-size: 0.86rem;
+    }
+
+    .tuning-note-cell small {
+      color: var(--muted);
+      font-size: 0.66rem;
+    }
+
+    .tuning-range-grid,
+    .tuning-example-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .tuning-range-item,
+    .tuning-example {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      padding: 10px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .tuning-range-item span,
+    .tuning-example span {
+      color: var(--muted);
+      font-size: 0.75rem;
+      line-height: 1.35;
+    }
+
+    .tuning-example strong {
+      font-size: 0.84rem;
+    }
+
+    .tuning-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+
+    .tuning-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .tuning-legend i {
+      width: 11px;
+      height: 11px;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+      background: #fffdf8;
+    }
+
+    .tuning-legend i.high { background: var(--teal-soft); border-color: var(--teal); }
+    .tuning-legend i.low { background: var(--gold-soft); border-color: var(--gold); }
+
     .app-tabs {
       width: min(1440px, calc(100vw - 32px));
       margin: 18px auto 0;
@@ -2180,15 +2352,17 @@
     }
 
     .practice-tab-shell {
+      --practice-string-count: 6;
+      --practice-tab-height: calc(var(--practice-string-count) * 26px + 24px);
       display: grid;
       grid-template-columns: 42px minmax(0, 1fr);
       min-width: 0;
     }
 
     .practice-tab-labels {
-      height: 180px;
+      height: var(--practice-tab-height);
       display: grid;
-      grid-template-rows: repeat(6, 26px) 24px;
+      grid-template-rows: repeat(var(--practice-string-count), 26px) 24px;
       align-items: center;
       justify-items: center;
       border-right: 1px solid var(--line);
@@ -2200,7 +2374,7 @@
 
     .practice-tab-stage {
       position: relative;
-      height: 180px;
+      height: var(--practice-tab-height);
       min-width: 0;
       overflow: hidden;
       background: linear-gradient(90deg, rgba(184, 51, 47, 0.06), transparent 34%);
@@ -2210,7 +2384,7 @@
       position: absolute;
       inset: 0 0 24px;
       display: grid;
-      grid-template-rows: repeat(6, 26px);
+      grid-template-rows: repeat(var(--practice-string-count), 26px);
       align-items: center;
       pointer-events: none;
     }
@@ -2236,7 +2410,7 @@
       position: absolute;
       left: calc(24% - 36px);
       top: 0;
-      height: 180px;
+      height: var(--practice-tab-height);
       display: flex;
       transition-property: transform;
       transition-timing-function: linear;
@@ -2246,9 +2420,9 @@
     .practice-tab-beat {
       width: 72px;
       min-width: 72px;
-      height: 180px;
+      height: var(--practice-tab-height);
       display: grid;
-      grid-template-rows: repeat(6, 26px) 24px;
+      grid-template-rows: repeat(var(--practice-string-count), 26px) 24px;
       align-items: center;
       justify-items: center;
       color: var(--muted);
@@ -2390,6 +2564,7 @@
       .tab-layout,
       .circle-lab,
       .caged-layout,
+      .tuning-compare-controls,
       .scale-controls {
         grid-template-columns: 1fr;
       }
@@ -2419,6 +2594,10 @@
       .tab-summary-grid,
       .harmony-pair-grid {
         grid-template-columns: 1fr 1fr;
+      }
+
+      .tuning-string-row {
+        grid-template-columns: 1fr;
       }
 
       .jam-console {
@@ -2463,7 +2642,10 @@
       .harmony-controls,
       .harmony-pair-grid,
       .caged-info-grid,
-      .caged-shape-row {
+      .caged-shape-row,
+      .tuning-compare-selects,
+      .tuning-range-grid,
+      .tuning-example-grid {
         grid-template-columns: 1fr;
       }
 
@@ -2540,6 +2722,15 @@
         </div>
         <div class="controls">
           <div class="select-group">
+            <label for="stringCountSelect">Strings</label>
+            <select id="stringCountSelect" aria-label="Choose guitar string count">
+              <option value="6" selected>6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+            </select>
+          </div>
+          <div class="select-group">
             <label for="tuningSelect">Tuning</label>
             <select id="tuningSelect" aria-label="Choose guitar tuning">
               <option value="standard" selected>Standard</option>
@@ -2565,6 +2756,7 @@
       <button class="app-tab" id="scalesTab" type="button" role="tab" aria-selected="true" aria-controls="scalesPage" data-tab="scales">Scales</button>
       <button class="app-tab" id="cagedTab" type="button" role="tab" aria-selected="false" aria-controls="cagedPage" data-tab="caged">CAGED</button>
       <button class="app-tab" id="practiceTab" type="button" role="tab" aria-selected="false" aria-controls="practicePage" data-tab="practice">Practice</button>
+      <button class="app-tab" id="tuningsTab" type="button" role="tab" aria-selected="false" aria-controls="tuningsPage" data-tab="tunings">Tunings</button>
       <button class="app-tab" id="bluesTab" type="button" role="tab" aria-selected="false" aria-controls="bluesPage" data-tab="blues">Blues Lab</button>
     </nav>
     <main>
@@ -3093,6 +3285,59 @@
           </div>
         </section>
       </section>
+
+      <section class="tab-page" id="tuningsPage" role="tabpanel" aria-labelledby="tuningsTab" data-page="tunings" hidden>
+        <section class="section" aria-labelledby="tuningsTitle">
+          <div class="section-header">
+            <div>
+              <h2 id="tuningsTitle">Tuning Comparison</h2>
+              <p>Compare string layouts, pitch ranges, exact subsets, and partial low-string matches.</p>
+            </div>
+          </div>
+          <div class="section-body">
+            <div class="tuning-compare-controls">
+              <div class="tuning-compare-side">
+                <strong>Instrument A</strong>
+                <div class="tuning-compare-selects">
+                  <div class="select-group">
+                    <label for="compareStringCountA">Strings</label>
+                    <select id="compareStringCountA" aria-label="Choose string count for instrument A">
+                      <option value="6" selected>6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                    </select>
+                  </div>
+                  <div class="select-group">
+                    <label for="compareTuningA">Tuning</label>
+                    <select id="compareTuningA" aria-label="Choose tuning for instrument A"></select>
+                  </div>
+                </div>
+              </div>
+              <div class="tuning-compare-side">
+                <strong>Instrument B</strong>
+                <div class="tuning-compare-selects">
+                  <div class="select-group">
+                    <label for="compareStringCountB">Strings</label>
+                    <select id="compareStringCountB" aria-label="Choose string count for instrument B">
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8" selected>8</option>
+                      <option value="9">9</option>
+                    </select>
+                  </div>
+                  <div class="select-group">
+                    <label for="compareTuningB">Tuning</label>
+                    <select id="compareTuningB" aria-label="Choose tuning for instrument B"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="tuningCompareResult" class="tuning-compare-result" aria-live="polite"></div>
+          </div>
+        </section>
+      </section>
+
       <section class="tab-page" id="bluesPage" role="tabpanel" aria-labelledby="bluesTab" data-page="blues" hidden>
       <div class="blues-control-strip">
         <div class="select-group">
@@ -3248,7 +3493,14 @@
     const FLAT_TO_SHARP = { Db: "C#", Eb: "D#", Gb: "F#", Ab: "G#", Bb: "A#", Cb: "B", Fb: "E" };
     const NOTE_LETTERS = ["C", "D", "E", "F", "G", "A", "B"];
     const NATURAL_NOTE_INDEX = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
-    const STRING_KEYS = ["E", "A", "D", "G", "B", "e"];
+    const CORE_SIX_KEYS = ["E", "A", "D", "G", "B", "e"];
+    const STRING_KEY_SETS = {
+      6: CORE_SIX_KEYS,
+      7: ["x7", ...CORE_SIX_KEYS],
+      8: ["x8", "x7", ...CORE_SIX_KEYS],
+      9: ["x9", "x8", "x7", ...CORE_SIX_KEYS]
+    };
+    let STRING_KEYS = STRING_KEY_SETS[6].slice();
     const CIRCLE_NOTES = ["C", "G", "D", "A", "E", "B", "F#", "Db", "Ab", "Eb", "Bb", "F"];
     const CIRCLE_DISPLAY_NAMES = { "F#": "F#/Gb", Db: "Db/C#", Ab: "Ab/G#", Eb: "Eb/D#", Bb: "Bb/A#" };
     const ROMAN_DEGREES = ["I", "II", "III", "IV", "V", "VI", "VII"];
@@ -3268,14 +3520,33 @@
     const SHAPE_LABELS = { full: "Full", vertical: "Vertical", diagonal: "Diagonal" };
     const FORM = ["I", "I", "I", "I", "IV", "IV", "I", "I", "V", "IV", "I", "V"];
     const FUNCTION_LABELS = { I: "I7", IV: "IV7", V: "V7" };
-    const TUNINGS = {
-      standard: { name: "Standard", notes: ["E", "A", "D", "G", "B", "E"], labels: ["E", "A", "D", "G", "B", "e"] },
-      dropD: { name: "Drop D", notes: ["D", "A", "D", "G", "B", "E"], labels: ["D", "A", "D", "G", "B", "e"] },
-      dropC: { name: "Drop C", notes: ["C", "G", "C", "F", "A", "D"], labels: ["C", "G", "C", "F", "A", "d"] },
-      halfStepDown: { name: "Half-step down", notes: ["Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["Eb", "Ab", "Db", "Gb", "Bb", "eb"] },
-      dadgad: { name: "DADGAD", notes: ["D", "A", "D", "G", "A", "D"], labels: ["D", "A", "D", "G", "A", "d"] },
-      openG: { name: "Open G", notes: ["D", "G", "D", "G", "B", "D"], labels: ["D", "G", "D", "G", "B", "d"] },
-      openD: { name: "Open D", notes: ["D", "A", "D", "F#", "A", "D"], labels: ["D", "A", "D", "F#", "A", "d"] }
+    const TUNINGS_BY_STRINGS = {
+      6: {
+        standard: { name: "Standard", lowMidi: 40, notes: ["E", "A", "D", "G", "B", "E"], labels: ["E", "A", "D", "G", "B", "e"] },
+        dropD: { name: "Drop D", lowMidi: 38, notes: ["D", "A", "D", "G", "B", "E"], labels: ["D", "A", "D", "G", "B", "e"] },
+        dropC: { name: "Drop C", lowMidi: 36, notes: ["C", "G", "C", "F", "A", "D"], labels: ["C", "G", "C", "F", "A", "d"] },
+        halfStepDown: { name: "Half-step down", lowMidi: 39, notes: ["Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["Eb", "Ab", "Db", "Gb", "Bb", "eb"] },
+        bStandard: { name: "B standard (baritone)", lowMidi: 35, notes: ["B", "E", "A", "D", "F#", "B"], labels: ["B", "E", "A", "D", "F#", "b"] },
+        fSharpStandard: { name: "F# standard (baritone)", lowMidi: 30, notes: ["F#", "B", "E", "A", "C#", "F#"], labels: ["F#", "B", "E", "A", "C#", "f#"] },
+        dadgad: { name: "DADGAD", lowMidi: 38, notes: ["D", "A", "D", "G", "A", "D"], labels: ["D", "A", "D", "G", "A", "d"] },
+        openG: { name: "Open G", lowMidi: 38, notes: ["D", "G", "D", "G", "B", "D"], labels: ["D", "G", "D", "G", "B", "d"] },
+        openD: { name: "Open D", lowMidi: 38, notes: ["D", "A", "D", "F#", "A", "D"], labels: ["D", "A", "D", "F#", "A", "d"] }
+      },
+      7: {
+        standard: { name: "Standard", lowMidi: 35, notes: ["B", "E", "A", "D", "G", "B", "E"], labels: ["B", "E", "A", "D", "G", "B", "e"] },
+        dropLowest: { name: "Drop A", lowMidi: 33, notes: ["A", "E", "A", "D", "G", "B", "E"], labels: ["A", "E", "A", "D", "G", "B", "e"] },
+        halfStepDown: { name: "Half-step down", lowMidi: 34, notes: ["Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] }
+      },
+      8: {
+        standard: { name: "Standard", lowMidi: 30, notes: ["F#", "B", "E", "A", "D", "G", "B", "E"], labels: ["F#", "B", "E", "A", "D", "G", "B", "e"] },
+        dropLowest: { name: "Drop E", lowMidi: 28, notes: ["E", "B", "E", "A", "D", "G", "B", "E"], labels: ["E", "B", "E", "A", "D", "G", "B", "e"] },
+        halfStepDown: { name: "Half-step down", lowMidi: 29, notes: ["F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] }
+      },
+      9: {
+        standard: { name: "Standard", lowMidi: 25, notes: ["C#", "F#", "B", "E", "A", "D", "G", "B", "E"], labels: ["C#", "F#", "B", "E", "A", "D", "G", "B", "e"] },
+        dropLowest: { name: "Drop B", lowMidi: 23, notes: ["B", "F#", "B", "E", "A", "D", "G", "B", "E"], labels: ["B", "F#", "B", "E", "A", "D", "G", "B", "e"] },
+        halfStepDown: { name: "Half-step down", lowMidi: 24, notes: ["C", "F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "Eb"], labels: ["C", "F", "Bb", "Eb", "Ab", "Db", "Gb", "Bb", "eb"] }
+      }
     };
     const HARMONY_TYPES = {
       diatonicThird: { name: "Diatonic 3rd", short: "3rd", mode: "diatonic", steps: 2, hint: "The classic twin-lead sound: count two scale notes above or below each melody note, so both guitars stay inside the key." },
@@ -3336,6 +3607,7 @@
     let selectedKey = "A";
     let selectedScaleCategory = "common";
     let scaleChordSize = 3;
+    let selectedStringCount = 6;
     let currentBar = 0;
     let beat = 0;
     let playing = false;
@@ -3372,6 +3644,7 @@
     let practiceFretRevealed = false;
     let practiceProgress = loadPracticeProgress();
 
+    const stringCountSelect = document.getElementById("stringCountSelect");
     const tuningSelect = document.getElementById("tuningSelect");
     const keySelect = document.getElementById("keySelect");
     const tempoRange = document.getElementById("tempoRange");
@@ -3504,6 +3777,11 @@
     const practiceFretboardTitle = document.getElementById("practiceFretboardTitle");
     const practiceFretboardMeta = document.getElementById("practiceFretboardMeta");
     const practiceFretAnswers = document.getElementById("practiceFretAnswers");
+    const compareStringCountA = document.getElementById("compareStringCountA");
+    const compareTuningA = document.getElementById("compareTuningA");
+    const compareStringCountB = document.getElementById("compareStringCountB");
+    const compareTuningB = document.getElementById("compareTuningB");
+    const tuningCompareResult = document.getElementById("tuningCompareResult");
 
     function noteIndex(note) { return NOTES.indexOf(note); }
     function noteIndexAny(note) { return noteIndex(FLAT_TO_SHARP[note] || note); }
@@ -3536,9 +3814,45 @@
       if (hideResult) return calculation.openNote + "(" + calculation.openNumber + ") + " + calculation.fret + " frets = ?";
       return calculation.openNote + "(" + calculation.openNumber + ") + " + calculation.fret + " frets = " + calculation.total + " -> " + calculation.wrapped + " -> " + calculation.resultNote;
     }
-    function currentTuning() { return TUNINGS[tuningSelect.value] || TUNINGS.standard; }
+    function tuningsForCount(count) { return TUNINGS_BY_STRINGS[Number(count)] || TUNINGS_BY_STRINGS[6]; }
+    function currentTuning() {
+      const tunings = tuningsForCount(selectedStringCount);
+      return tunings[tuningSelect.value] || tunings.standard;
+    }
+    function instrumentLabel() { return selectedStringCount + "-string " + currentTuning().name; }
+    function coreSixOffset() { return Math.max(0, STRING_KEYS.length - CORE_SIX_KEYS.length); }
+    function coreSixKeys() { return STRING_KEYS.slice(-6); }
+    function coreSixNotes() { return currentTuning().notes.slice(-6); }
+    function populateTuningOptions(select, count, preferred) {
+      const tunings = tuningsForCount(count);
+      select.innerHTML = Object.entries(tunings).map(function(entry) {
+        return '<option value="' + escapeHtml(entry[0]) + '">' + escapeHtml(entry[1].name) + "</option>";
+      }).join("");
+      select.value = tunings[preferred] ? preferred : "standard";
+    }
+    function populatePracticeStringSelect() {
+      const previous = practiceFretStringSelect.value;
+      practiceFretStringSelect.innerHTML = '<option value="all">All strings</option>' + STRING_KEYS.map(function(stringKey, index) {
+        const number = STRING_KEYS.length - index;
+        const position = index === 0 ? "lowest" : index === STRING_KEYS.length - 1 ? "highest" : "string";
+        const label = position === "string" ? "String " + number + " - " + stringLabel(stringKey) : "String " + number + " (" + position + ") - " + stringLabel(stringKey);
+        return '<option value="' + escapeHtml(stringKey) + '">' + escapeHtml(label) + "</option>";
+      }).join("");
+      practiceFretStringSelect.value = STRING_KEYS.includes(previous) ? previous : "all";
+    }
+    function configureInstrument(count, preferredTuning) {
+      selectedStringCount = Number(count);
+      STRING_KEYS = STRING_KEY_SETS[selectedStringCount].slice();
+      stringCountSelect.value = String(selectedStringCount);
+      populateTuningOptions(tuningSelect, selectedStringCount, preferredTuning || tuningSelect.value);
+      populatePracticeStringSelect();
+    }
     function openIndexForString(stringKey) { return noteIndexAny(currentTuning().notes[STRING_KEYS.indexOf(stringKey)]); }
     function stringLabel(stringKey) { return currentTuning().labels[STRING_KEYS.indexOf(stringKey)]; }
+    function tabStringLabel(stringKey) {
+      const number = STRING_KEYS.length - STRING_KEYS.indexOf(stringKey);
+      return selectedStringCount > 6 ? number + ":" + stringLabel(stringKey) : stringLabel(stringKey);
+    }
     function noteAtStringFret(stringKey, fret) { return noteFromIndex(openIndexForString(stringKey) + fret); }
     function chordName(root) { return `${root}7`; }
     function rootLetter(note) { return note[0]; }
@@ -3788,8 +4102,9 @@
       const rootIndex = noteIndexAny(root);
       const fourth = noteFromIndex(rootIndex + 5);
       const fifth = noteFromIndex(rootIndex + 7);
-      const lowOpen = currentTuning().notes[0];
-      const fifthStringOpen = currentTuning().notes[1];
+      const sixNotes = coreSixNotes();
+      const lowOpen = sixNotes[0];
+      const fifthStringOpen = sixNotes[1];
       return {
         root,
         rootIndex,
@@ -3803,6 +4118,103 @@
     }
     function escapeHtml(value) {
       return String(value).replace(/[&<>"]/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" })[char]);
+    }
+    function tuningPitches(tuning) {
+      const pcs = tuning.notes.map(noteIndexAny);
+      let lowPitch = Number.isFinite(tuning.lowMidi) ? tuning.lowMidi : pcs[0] + 36;
+      const pitches = [lowPitch];
+      for (let index = 1; index < pcs.length; index += 1) {
+        let pitch = pcs[index];
+        while (pitch <= pitches[index - 1]) pitch += 12;
+        pitches.push(pitch);
+      }
+      return pitches;
+    }
+    function pitchName(pitch) {
+      return chromaticDisplayName(pitch % 12) + (Math.floor(pitch / 12) - 1);
+    }
+    function matchingSuffixCount(notesA, notesB) {
+      let count = 0;
+      while (count < notesA.length && count < notesB.length) {
+        if (noteIndexAny(notesA[notesA.length - 1 - count]) !== noteIndexAny(notesB[notesB.length - 1 - count])) break;
+        count += 1;
+      }
+      return count;
+    }
+    function matchingPrefixCount(notesA, notesB) {
+      let count = 0;
+      while (count < notesA.length && count < notesB.length) {
+        if (noteIndexAny(notesA[count]) !== noteIndexAny(notesB[count])) break;
+        count += 1;
+      }
+      return count;
+    }
+    function tuningRelationship(tuningA, tuningB) {
+      const notesA = tuningA.notes;
+      const notesB = tuningB.notes;
+      const highMatch = matchingSuffixCount(notesA, notesB);
+      const lowMatch = matchingPrefixCount(notesA, notesB);
+      const shorter = Math.min(notesA.length, notesB.length);
+      const same = notesA.length === notesB.length && highMatch === notesA.length;
+      if (same) return { key: "same", title: "Same tuning", detail: "Every open string matches, so notes and shapes transfer directly.", highMatch, lowMatch };
+      if (highMatch === shorter) {
+        const smaller = notesA.length < notesB.length ? "Instrument A" : "Instrument B";
+        const larger = notesA.length > notesB.length ? "Instrument A" : "Instrument B";
+        return { key: "subset", title: "Exact upper-string subset", detail: smaller + " is reproduced exactly on the highest " + shorter + " strings of " + larger + ". Shapes transfer unchanged inside that shared string set.", highMatch, lowMatch };
+      }
+      if (notesA.length === notesB.length) {
+        const differences = notesA.map(function(note, index) { return (noteIndexAny(notesB[index]) - noteIndexAny(note) + 12) % 12; });
+        if (differences.every(function(value) { return value === differences[0]; })) {
+          return { key: "transpose", title: "Parallel transposition", detail: "Every string moves by the same interval. Shapes stay the same, but every sounding note changes.", highMatch, lowMatch };
+        }
+      }
+      if (lowMatch >= 2) return { key: "partial", title: "Partial low-string match", detail: "The lowest " + lowMatch + " strings match exactly, then the layouts diverge. Low riffs can transfer there, but full chord and scale shapes cannot.", highMatch, lowMatch };
+      if (noteIndexAny(notesA[0]) === noteIndexAny(notesB[0])) return { key: "same-low", title: "Same lowest note, different layout", detail: "Both instruments reach the same low pitch class, but their remaining strings differ. Treat this as range overlap, not shape equivalence.", highMatch, lowMatch };
+      return { key: "different", title: "Different range and layout", detail: "Some fretted notes overlap, but the open-string map does not provide a direct shape transfer.", highMatch, lowMatch };
+    }
+    function comparisonLane(tuning, side, relationship) {
+      return '<div class="tuning-string-row"><span>' + escapeHtml(side + " - " + tuning.notes.length + " strings, " + tuning.name) + '</span><div class="tuning-note-lane">' + tuning.notes.map(function(note, index) {
+        const high = index >= tuning.notes.length - relationship.highMatch;
+        const low = index < relationship.lowMatch && !high;
+        const className = "tuning-note-cell" + (high ? " match-high" : low ? " match-low" : "");
+        return '<div class="' + className + '"><strong>' + escapeHtml(chromaticDisplayName(note)) + '</strong><small>string ' + (tuning.notes.length - index) + "</small></div>";
+      }).join("") + "</div></div>";
+    }
+    function populateCompareTuning(select, count, preferred) {
+      populateTuningOptions(select, count, preferred);
+    }
+    function renderTuningComparison() {
+      const countA = Number(compareStringCountA.value);
+      const countB = Number(compareStringCountB.value);
+      const tuningA = tuningsForCount(countA)[compareTuningA.value] || tuningsForCount(countA).standard;
+      const tuningB = tuningsForCount(countB)[compareTuningB.value] || tuningsForCount(countB).standard;
+      const relationship = tuningRelationship(tuningA, tuningB);
+      const pitchesA = tuningPitches(tuningA);
+      const pitchesB = tuningPitches(tuningB);
+      const overlapLow = Math.max(pitchesA[0], pitchesB[0]);
+      const overlapHigh = Math.min(pitchesA[pitchesA.length - 1], pitchesB[pitchesB.length - 1]);
+      const overlap = Math.max(0, overlapHigh - overlapLow);
+      const examples = [
+        ["6 Standard vs 8 Standard", "Exact upper-six subset: ignore the two lowest strings and the six-string map is unchanged."],
+        ["7 Standard vs 9 Standard", "Exact upper-seven subset: the nine-string adds C# and F# beneath the familiar seven-string layout."],
+        ["6 B standard vs 7 Standard", "The lowest four strings B-E-A-D match; the upper strings diverge, so low riffs transfer more cleanly than chords."],
+        ["6 F# standard vs 8 Standard", "The lowest four strings F#-B-E-A match; the major-third break occurs in a different place above them."]
+      ];
+      tuningCompareResult.innerHTML = `
+        <div class="tuning-match-summary"><strong>${escapeHtml(relationship.title)}</strong><span>${escapeHtml(relationship.detail)}</span></div>
+        <div class="tuning-string-comparison">
+          ${comparisonLane(tuningA, "Instrument A", relationship)}
+          ${comparisonLane(tuningB, "Instrument B", relationship)}
+        </div>
+        <div class="tuning-legend"><span><i class="high"></i>exact match from the highest string</span><span><i class="low"></i>matching low-string run</span></div>
+        <div class="tuning-range-grid">
+          <div class="tuning-range-item"><span>Instrument A range</span><strong>${escapeHtml(pitchName(pitchesA[0]) + " to " + pitchName(pitchesA[pitchesA.length - 1]))}</strong><span>${pitchesA[pitchesA.length - 1] - pitchesA[0]} semitones open-string span</span></div>
+          <div class="tuning-range-item"><span>Instrument B range</span><strong>${escapeHtml(pitchName(pitchesB[0]) + " to " + pitchName(pitchesB[pitchesB.length - 1]))}</strong><span>${pitchesB[pitchesB.length - 1] - pitchesB[0]} semitones open-string span</span></div>
+          <div class="tuning-range-item"><span>Shared open-string range</span><strong>${overlap ? escapeHtml(pitchName(overlapLow) + " to " + pitchName(overlapHigh)) : "No continuous overlap"}</strong><span>${overlap} semitones</span></div>
+          <div class="tuning-range-item"><span>Shape transfer</span><strong>${relationship.key === "same" || relationship.key === "subset" || relationship.key === "transpose" ? "Direct in the matched layout" : relationship.lowMatch >= 2 ? "Low strings only" : "Re-map the strings"}</strong><span>Always check where the G-to-B-style major-third break falls.</span></div>
+        </div>
+        <div class="tuning-example-grid">${examples.map(function(item) { return '<div class="tuning-example"><strong>' + escapeHtml(item[0]) + '</strong><span>' + escapeHtml(item[1]) + "</span></div>"; }).join("")}</div>
+      `;
     }
 
     function selectAppTab(tabName) {
@@ -3838,8 +4250,8 @@
       const template = shape[chordType] || shape.major;
       const offsets = template.filter(value => value != null);
       const minOffset = Math.min(...offsets);
-      const rootStringIndex = STRING_KEYS.indexOf(shape.rootString);
-      const rootFret = fretFor(root, currentTuning().notes[rootStringIndex], Math.max(0, -minOffset));
+      const rootStringIndex = CORE_SIX_KEYS.indexOf(shape.rootString);
+      const rootFret = fretFor(root, coreSixNotes()[rootStringIndex], Math.max(0, -minOffset));
       return template.map(offset => offset == null ? null : rootFret + offset);
     }
     function renderCaged() {
@@ -3862,26 +4274,27 @@
       cagedFretNumbers.style.minWidth = minWidth;
       cagedFretboard.innerHTML = "";
       STRING_KEYS.slice().reverse().forEach(stringKey => {
-        const stringIndex = STRING_KEYS.indexOf(stringKey);
+        const coreStringIndex = CORE_SIX_KEYS.indexOf(stringKey);
+        const isExtendedString = coreStringIndex < 0;
         const label = document.createElement("div");
-        label.className = "string-label";
+        label.className = "string-label" + (isExtendedString ? " extended-muted" : "");
         label.textContent = stringLabel(stringKey);
         cagedFretboard.appendChild(label);
         range.forEach(fret => {
           const cell = document.createElement("div");
-          cell.className = "cell";
+          cell.className = "cell" + (isExtendedString ? " extended-muted" : "");
           const pc = (openIndexForString(stringKey) + fret) % 12;
-          const shapeFret = frets[stringIndex];
+          const shapeFret = isExtendedString ? null : frets[coreStringIndex];
           const chordTone = chordDegreeForPc(root, pc, chordType);
           const scaleTone = scaleNotes.find(note => note.pc === pc);
-          if (shapeFret === fret) {
+          if (!isExtendedString && shapeFret === fret) {
             const marker = document.createElement("span");
             const role = chordTone ? chordTone.role : "shape-outside";
             marker.className = `marker caged-tone ${role}`;
             marker.textContent = chordTone ? chordTone.degree : noteFromIndex(pc);
             marker.title = `${noteFromIndex(pc)} at fret ${fret}${chordTone ? `, chord tone ${chordTone.degree}` : ""}`;
             cell.appendChild(marker);
-          } else if (scaleTone) {
+          } else if (!isExtendedString && scaleTone) {
             const marker = document.createElement("span");
             marker.className = "marker caged-scale";
             marker.textContent = scaleTone.degree;
@@ -3892,17 +4305,17 @@
         });
       });
       cagedFretNumbers.innerHTML = `<span></span>${range.map(fret => `<span>${fret}fr</span>`).join("")}`;
-      const soundingNotes = [...new Set(frets.map((fret, index) => fret == null ? null : noteFromIndex(noteIndexAny(currentTuning().notes[index]) + fret)).filter(Boolean))].join(" ");
+      const soundingNotes = [...new Set(frets.map((fret, index) => fret == null ? null : noteFromIndex(noteIndexAny(coreSixNotes()[index]) + fret)).filter(Boolean))].join(" ");
       cagedFretboardTitle.textContent = `${root} ${shape.name}`;
-      cagedFretboardMeta.textContent = `${currentTuning().name}, ${chordType === "dominant" ? "dominant 7" : "major triad"} with ${scale.name} overlay`;
+      cagedFretboardMeta.textContent = `${instrumentLabel()}, ${chordType === "dominant" ? "dominant 7" : "major triad"} with ${scale.name} overlay`;
       cagedInfoGrid.innerHTML = [
         ["Open origin", shape.origin],
-        ["Root anchor", `${shape.rootString}-string root at ${frets[STRING_KEYS.indexOf(shape.rootString)]}fr`],
+        ["Root anchor", `${shape.rootString}-string root at ${frets[CORE_SIX_KEYS.indexOf(shape.rootString)]}fr`],
         ["Fret span", `${start}fr to ${end}fr`],
         ["Sounds", soundingNotes]
       ].map(item => `<div class="caged-card"><span>${escapeHtml(item[0])}</span><strong>${escapeHtml(item[1])}</strong></div>`).join("");
       const cagedCompatibility = cagedTuningCompatibility();
-      cagedNote.textContent = shape.hint + " " + cagedCompatibility.message;
+      cagedNote.textContent = shape.hint + " " + cagedCompatibility.message + (selectedStringCount > 6 ? " Added lower strings are shown muted so the six-string CAGED geometry stays unambiguous." : "");
     }
     function defaultPracticeProgress() {
       return {
@@ -3962,9 +4375,11 @@
 
     function practiceStringName(stringKey) {
       const label = stringLabel(stringKey);
-      if (stringKey === "E") return "low " + label;
-      if (stringKey === "e") return "high " + label;
-      return label;
+      const index = STRING_KEYS.indexOf(stringKey);
+      const number = STRING_KEYS.length - index;
+      if (index === 0) return "string " + number + " (lowest " + label + ")";
+      if (index === STRING_KEYS.length - 1) return "string 1 (highest " + label + ")";
+      return "string " + number + " (" + label + ")";
     }
 
     function updatePracticeSummary() {
@@ -4003,14 +4418,16 @@
         if (!markerMap.has(key)) markerMap.set(key, marker);
       });
       const targetKeys = new Set(settings.targetKeys || []);
+      const mutedStrings = new Set(settings.mutedStrings || []);
       container.style.gridTemplateColumns = columns;
       container.style.minWidth = minWidth;
       numbersEl.style.gridTemplateColumns = columns;
       numbersEl.style.minWidth = minWidth;
       container.innerHTML = "";
       STRING_KEYS.slice().reverse().forEach(function(stringKey) {
+        const isMuted = mutedStrings.has(stringKey);
         const label = document.createElement("div");
-        label.className = "string-label";
+        label.className = "string-label" + (isMuted ? " extended-muted" : "");
         label.textContent = stringLabel(stringKey);
         container.appendChild(label);
         range.frets.forEach(function(fret) {
@@ -4018,13 +4435,13 @@
           const cell = document.createElement("button");
           const note = noteAtStringFret(stringKey, fret);
           cell.type = "button";
-          cell.className = "cell practice-cell" + (targetKeys.has(key) ? " is-target" : "");
+          cell.className = "cell practice-cell" + (targetKeys.has(key) ? " is-target" : "") + (isMuted ? " extended-muted" : "");
           cell.dataset.string = stringKey;
           cell.dataset.fret = String(fret);
-          cell.disabled = Boolean(settings.disabled);
+          cell.disabled = Boolean(settings.disabled) || isMuted;
           cell.setAttribute("aria-label", note + " on " + practiceStringName(stringKey) + " string at fret " + fret);
           const marker = markerMap.get(key);
-          if (marker) {
+          if (marker && !isMuted) {
             const markerElement = document.createElement("span");
             markerElement.className = "marker " + (marker.className || "scale");
             if (marker.current) markerElement.classList.add("practice-current");
@@ -4084,7 +4501,7 @@
         });
       });
       ascending.sort(function(a, b) { return a.pitch - b.pitch; });
-      ascending = ascending.slice(0, 12);
+      ascending = ascending.slice(0, Math.min(18, STRING_KEYS.length * 2));
       const exercise = practiceScaleExerciseSelect.value;
       let path = ascending.slice();
       if (exercise === "upDown" && ascending.length > 1) {
@@ -4132,9 +4549,10 @@
 
     function renderPracticeScrollingTab() {
       const displayStrings = STRING_KEYS.slice().reverse();
+      practiceScrollingTabLabels.parentElement.style.setProperty("--practice-string-count", String(displayStrings.length));
       const currentIndex = Math.min(practiceScaleIndex, Math.max(0, practiceScalePath.length - 1));
       practiceScrollingTabLabels.innerHTML = displayStrings.map(function(stringKey) {
-        return "<span>" + escapeHtml(stringLabel(stringKey)) + "</span>";
+        return "<span>" + escapeHtml(tabStringLabel(stringKey)) + "</span>";
       }).join("") + "<span>#</span>";
       practiceScrollingTabLines.innerHTML = displayStrings.map(function() {
         return "<span></span>";
@@ -4153,7 +4571,7 @@
       const playingNow = Boolean(practiceTimer) && practiceScaleStage === "play" && practiceCountIn === 0;
       practiceScrollingTabTrack.style.transitionDuration = playingNow ? Math.max(120, 60000 / Number(tempoRange.value) * 0.82) + "ms" : "220ms";
       practiceScrollingTabTrack.style.transform = "translateX(" + (-currentIndex * 72) + "px)";
-      practiceScrollingTabMeta.textContent = currentTuning().name + ", " + tempoRange.value + " BPM, step " + (currentIndex + 1) + " of " + practiceScalePath.length;
+      practiceScrollingTabMeta.textContent = instrumentLabel() + ", " + tempoRange.value + " BPM, step " + (currentIndex + 1) + " of " + practiceScalePath.length;
       practiceScrollingTabStage.setAttribute("aria-label", "Scrolling tablature for " + practiceScaleRootSelect.value + " " + (SCALE_LIBRARY[practiceScaleSelect.value] || SCALE_LIBRARY.minorPentatonic).name + ", step " + (currentIndex + 1) + " of " + practiceScalePath.length);
     }
 
@@ -4181,7 +4599,7 @@
         onClick: handlePracticeScaleCell
       });
       practiceScaleFretboardTitle.textContent = root + " " + scale.name + " Practice";
-      practiceScaleFretboardMeta.textContent = currentTuning().name + ", frets " + practiceScaleRange.start + "-" + practiceScaleRange.end + ", " + practiceScaleStage;
+      practiceScaleFretboardMeta.textContent = instrumentLabel() + ", frets " + practiceScaleRange.start + "-" + practiceScaleRange.end + ", " + practiceScaleStage;
       practiceScaleSequence.innerHTML = practiceScalePath.map(function(position, index) {
         let className = "practice-step";
         if (index < practiceScaleIndex) className += " complete";
@@ -4291,21 +4709,21 @@
     }
     function cagedTuningCompatibility() {
       const tuningKey = tuningSelect.value;
-      if (tuningKey === "standard" || tuningKey === "halfStepDown") {
+      if (tuningKey === "standard" || tuningKey === "halfStepDown" || (selectedStringCount > 6 && tuningKey === "dropLowest")) {
         return {
           level: "full",
-          message: currentTuning().name + " preserves the complete interval layout used by CAGED."
+          message: instrumentLabel() + " preserves the standard six-string layout on its highest six strings."
         };
       }
-      if (tuningKey === "dropD" || tuningKey === "dropC") {
+      if (selectedStringCount === 6 && (tuningKey === "dropD" || tuningKey === "dropC")) {
         return {
           level: "partial",
-          message: currentTuning().name + " changes the lowest string. Practice uses the upper five strings; switch to Standard for full E- and G-shape roots."
+          message: instrumentLabel() + " changes the lowest core string. Practice uses the upper five strings; switch to Standard for full E- and G-shape roots."
         };
       }
       return {
         level: "incompatible",
-        message: currentTuning().name + " changes the string relationships that define standard CAGED shapes. Switch to Standard for this practice curriculum."
+        message: instrumentLabel() + " changes the string relationships that define standard CAGED shapes. Switch to Standard for this practice curriculum."
       };
     }
 
@@ -4313,9 +4731,9 @@
       const template = shape.major;
       const offsets = template.filter(function(value) { return value != null; });
       const minOffset = Math.min.apply(null, offsets);
-      let rootStringIndex = STRING_KEYS.indexOf(shape.rootString);
+      let rootStringIndex = CORE_SIX_KEYS.indexOf(shape.rootString);
       if (compatibility.level === "partial" && shape.rootString === "E") rootStringIndex = 5;
-      const rootFret = fretFor(root, currentTuning().notes[rootStringIndex], Math.max(0, -minOffset));
+      const rootFret = fretFor(root, coreSixNotes()[rootStringIndex], Math.max(0, -minOffset));
       return template.map(function(offset) { return offset == null ? null : rootFret + offset; });
     }
 
@@ -4325,7 +4743,7 @@
       return frets.map(function(fret, stringIndex) {
         if (fret == null) return null;
         if (compatibility.level === "partial" && stringIndex === 0) return null;
-        const stringKey = STRING_KEYS[stringIndex];
+        const stringKey = CORE_SIX_KEYS[stringIndex];
         const pc = (openIndexForString(stringKey) + fret) % 12;
         const chordTone = chordDegreeForPc(root, pc, "major");
         return {
@@ -4407,7 +4825,7 @@
 
       let allPositions = practiceCagedTargets.concat(practiceCagedGuides);
       if (!allPositions.length) {
-        allPositions = [{ stringKey: "E", fret: 0, note: currentTuning().notes[0], degree: "1", role: "root" }];
+        allPositions = [{ stringKey: "E", fret: 0, note: coreSixNotes()[0], degree: "1", role: "root" }];
       }
       const usedFrets = allPositions.map(function(position) { return position.fret; });
       const start = Math.max(0, Math.min.apply(null, usedFrets) - 1);
@@ -4441,6 +4859,7 @@
       });
       renderPracticeFretboard(practiceCagedFretboard, practiceCagedFretNumbers, range, targetMarkers.concat(guideMarkers), {
         disabled: disabled,
+        mutedStrings: STRING_KEYS.filter(function(stringKey) { return !CORE_SIX_KEYS.includes(stringKey); }),
         onClick: handlePracticeCagedCell
       });
 
@@ -4453,7 +4872,7 @@
       const nextShape = CAGED_ORDER[(CAGED_ORDER.indexOf(shapeKey) + 1) % CAGED_ORDER.length];
       practiceCagedFretboardTitle.textContent = root + " " + shapeKey + " Shape Practice";
       if (drill === "connectShape") practiceCagedFretboardTitle.textContent += " -> " + nextShape + " Shape";
-      practiceCagedFretboardMeta.textContent = currentTuning().name + ", " + drillNames[drill];
+      practiceCagedFretboardMeta.textContent = instrumentLabel() + ", " + drillNames[drill];
       if (disabled) {
         setPracticePrompt(practiceCagedPrompt, "Standard CAGED practice paused", compatibility.message, "error");
         return;
@@ -4720,12 +5139,12 @@
 
       if (challenge.drill === "fretFlash") {
         practiceFretboardTitle.textContent = "Name This Fret";
-        practiceFretboardMeta.textContent = currentTuning().name + ", frets " + range.start + "-" + range.end;
+        practiceFretboardMeta.textContent = instrumentLabel() + ", frets " + range.start + "-" + range.end;
         setPracticePrompt(practiceFretPrompt, "Name the highlighted position", practiceStringName(challenge.stringKey) + " string at fret " + challenge.fret + ".", "");
       } else if (challenge.drill === "fretMath") {
         const calculation = fretMathCalculation(challenge.openNote, challenge.fret);
         practiceFretboardTitle.textContent = "Fret Math";
-        practiceFretboardMeta.textContent = currentTuning().name + ", challenge frets " + selectedRange.start + "-" + selectedRange.end;
+        practiceFretboardMeta.textContent = instrumentLabel() + ", challenge frets " + selectedRange.start + "-" + selectedRange.end;
         if (practiceFretRevealed) {
           setPracticePrompt(practiceFretPrompt, "Answer: " + calculation.resultNote, fretMathEquationText(challenge.openNote, challenge.fret, false), "success");
         } else {
@@ -4733,11 +5152,11 @@
         }
       } else if (challenge.drill === "intervalHunt") {
         practiceFretboardTitle.textContent = "Interval Hunt";
-        practiceFretboardMeta.textContent = currentTuning().name + ", frets " + range.start + "-" + range.end;
+        practiceFretboardMeta.textContent = instrumentLabel() + ", frets " + range.start + "-" + range.end;
         setPracticePrompt(practiceFretPrompt, "Find the " + challenge.interval.degree + " from " + challenge.rootNote, "Stay on the " + practiceStringName(challenge.stringKey) + " string and count the fret distance.", "");
       } else {
         practiceFretboardTitle.textContent = "Fretboard Note Hunt";
-        practiceFretboardMeta.textContent = currentTuning().name + ", frets " + range.start + "-" + range.end;
+        practiceFretboardMeta.textContent = instrumentLabel() + ", frets " + range.start + "-" + range.end;
         setPracticePrompt(practiceFretPrompt, "Find " + challenge.targetNote, "Tap " + challenge.targetNote + " on the " + practiceStringName(challenge.stringKey) + " string.", "");
       }
     }
@@ -4872,32 +5291,50 @@
       formSubtitle.textContent = `${info.chords.I} for 4 bars, ${info.chords.IV} for 2, back to ${info.chords.I}, then ${info.chords.V}-${info.chords.IV}-${info.chords.I}-${info.chords.V}.`;
       updateCurrentBar();
     }
+    function extendChordToActive(chord) {
+      if (chord.frets.length === STRING_KEYS.length) return chord;
+      const extra = Math.max(0, STRING_KEYS.length - chord.frets.length);
+      return {
+        ...chord,
+        frets: Array(extra).fill(null).concat(chord.frets),
+        roots: (chord.roots || []).map(function(index) { return index + extra; }),
+        barres: (chord.barres || []).map(function(barre) { return { ...barre, from: barre.from + extra, to: barre.to + extra }; })
+      };
+    }
+    function chordFingering(chord) {
+      return chord.frets.map(function(fret) { return fret == null ? "x" : fret; }).join("-");
+    }
     function chordSoundingNotes(chord) {
       const notes = chord.frets.map((fret, stringIndex) => fret == null ? null : noteFromIndex(noteIndexAny(currentTuning().notes[stringIndex]) + fret)).filter(Boolean);
       return [...new Set(notes)].join(" ");
     }
     function renderOpenChords() {
-      openChordGrid.innerHTML = OPEN_CHORDS.map(chord => `
+      openChordGrid.innerHTML = OPEN_CHORDS.map(function(baseChord) {
+        const chord = extendChordToActive(baseChord);
+        return `
         <article class="diagram-panel">
           <h3>${chord.name} shape</h3>
-          <div class="shape-name">${chord.caption}</div>
+          <div class="shape-name">${chord.caption}${selectedStringCount > 6 ? " Added lower strings are muted." : ""}</div>
           <div class="chord-diagram">${makeChordSvg(chord)}</div>
-          <div class="fingering">${chord.name}: ${chord.shape}<br>sounds: ${chordSoundingNotes(chord)}</div>
+          <div class="fingering">${chord.name}: ${chordFingering(chord)}<br>sounds: ${chordSoundingNotes(chord)}</div>
         </article>
-      `).join("");
+      `;
+      }).join("");
     }
     function makeChordSvg(chord) {
-      const width = 190, height = 194, x0 = 34, y0 = 42, stringGap = 24, fretGap = 24, maxFretRows = 5;
-      const stringXs = Array.from({ length: 6 }, (_, i) => x0 + i * stringGap);
+      const stringCount = chord.frets.length;
+      const stringGap = stringCount >= 9 ? 22 : 24;
+      const width = Math.max(190, 68 + (stringCount - 1) * stringGap), height = 194, x0 = 34, y0 = 42, fretGap = 24, maxFretRows = 5;
+      const stringXs = Array.from({ length: stringCount }, (_, i) => x0 + i * stringGap);
       const baseFret = chord.baseFret || 1;
       let parts = [];
       parts.push(`<svg class="chord-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${chord.name} chord diagram">`);
       parts.push(`<text x="${width / 2}" y="16" text-anchor="middle" font-size="14" font-weight="800" fill="#161616">${chord.name}</text>`);
       if (baseFret > 1) parts.push(`<text x="9" y="${y0 + 16}" font-size="11" font-weight="700" fill="#5b5d63">${baseFret}fr</text>`);
-      stringXs.forEach((x, i) => parts.push(`<line x1="${x}" y1="${y0}" x2="${x}" y2="${y0 + maxFretRows * fretGap}" stroke="#473928" stroke-width="${1.4 + (5 - i) * 0.2}"/>`));
+      stringXs.forEach((x, i) => parts.push(`<line x1="${x}" y1="${y0}" x2="${x}" y2="${y0 + maxFretRows * fretGap}" stroke="#473928" stroke-width="${1.4 + (stringCount - 1 - i) * 0.14}"/>`));
       for (let row = 0; row <= maxFretRows; row++) {
         const y = y0 + row * fretGap;
-        parts.push(`<line x1="${stringXs[0]}" y1="${y}" x2="${stringXs[5]}" y2="${y}" stroke="#473928" stroke-width="${row === 0 && baseFret === 1 ? 5 : 2}" stroke-linecap="round"/>`);
+        parts.push(`<line x1="${stringXs[0]}" y1="${y}" x2="${stringXs[stringXs.length - 1]}" y2="${y}" stroke="#473928" stroke-width="${row === 0 && baseFret === 1 ? 5 : 2}" stroke-linecap="round"/>`);
       }
       (chord.barres || []).forEach(barre => {
         const y = y0 + (barre.fret - baseFret + 0.5) * fretGap;
@@ -4924,11 +5361,11 @@
         ["I7 chord", info.chords.I, `lowest-string root: ${info.lowEFret}fr`],
         ["IV7 chord", info.chords.IV, `5th-string root: ${info.aStringFourthFret}fr`],
         ["V7 chord", info.chords.V, `5th-string root: ${info.aStringFifthFret}fr`],
-        ["Lead box", `${info.root} blues`, `shape follows ${currentTuning().name}`]
+        ["Lead box", `${info.root} blues`, `shape follows ${instrumentLabel()}`]
       ];
       transposeGrid.innerHTML = tiles.map(tile => `<div class="position-tile"><span>${tile[0]}</span><strong>${tile[1]}</strong><span>${tile[2]}</span></div>`).join("");
-      transposeSubtitle.textContent = `${info.root} blues uses ${info.chords.I}, ${info.chords.IV}, and ${info.chords.V}. Fret references follow ${currentTuning().name} tuning.`;
-      scaleSubtitle.textContent = `${info.root} blues shown in a compact ${currentTuning().name} box.`;
+      transposeSubtitle.textContent = `${info.root} blues uses ${info.chords.I}, ${info.chords.IV}, and ${info.chords.V}. Fret references follow ${instrumentLabel()}.`;
+      scaleSubtitle.textContent = `${info.root} blues shown in a compact ${instrumentLabel()} box.`;
     }
     function renderMoveableChords() {
       const info = getKeyInfo(selectedKey);
@@ -4938,7 +5375,10 @@
         { name: info.chords.IV, shape: `x-${aRootIV}-${aRootIV + 2}-${aRootIV}-${aRootIV + 2}-${aRootIV}`, caption: "5th-string root dominant 7 grip.", frets: [null, aRootIV, aRootIV + 2, aRootIV, aRootIV + 2, aRootIV], baseFret: aRootIV, roots: [1], barres: [{ fret: aRootIV, from: 1, to: 5 }] },
         { name: info.chords.V, shape: `x-${aRootV}-${aRootV + 2}-${aRootV}-${aRootV + 2}-${aRootV}`, caption: "Same 5th-string shape for the V chord.", frets: [null, aRootV, aRootV + 2, aRootV, aRootV + 2, aRootV], baseFret: aRootV, roots: [1], barres: [{ fret: aRootV, from: 1, to: 5 }] }
       ];
-      moveableChordGrid.innerHTML = shapes.map(shape => `<article class="diagram-panel"><h3>${shape.name}</h3><div class="shape-name">${shape.caption}</div><div class="chord-diagram">${makeChordSvg(shape)}</div><div class="fingering">${shape.shape}<br>sounds: ${chordSoundingNotes(shape)}</div></article>`).join("");
+      moveableChordGrid.innerHTML = shapes.map(function(baseShape) {
+        const shape = extendChordToActive(baseShape);
+        return `<article class="diagram-panel"><h3>${shape.name}</h3><div class="shape-name">${shape.caption}${selectedStringCount > 6 ? " Added lower strings are muted." : ""}</div><div class="chord-diagram">${makeChordSvg(shape)}</div><div class="fingering">${chordFingering(shape)}<br>sounds: ${chordSoundingNotes(shape)}</div></article>`;
+      }).join("");
     }
     function shapeRange(root, shape) {
       if (shape === "full") return { frets: Array.from({ length: 13 }, (_, i) => i), start: 0, end: 12 };
@@ -4997,21 +5437,13 @@
       return Math.max(min, Math.min(max, value));
     }
     function currentTuningPitches() {
-      const pcs = currentTuning().notes.map(noteIndexAny);
-      let lowPitch = pcs[0];
-      while (lowPitch < 36) lowPitch += 12;
-      while (lowPitch > 47) lowPitch -= 12;
-      const pitches = [lowPitch];
-      for (let index = 1; index < pcs.length; index += 1) {
-        let pitch = pcs[index];
-        while (pitch <= pitches[index - 1]) pitch += 12;
-        pitches.push(pitch);
-      }
-      return pitches;
+      return tuningPitches(currentTuning());
     }
     function harmonyRange() {
       const register = HARMONY_REGISTERS[harmonyRegisterSelect.value] || HARMONY_REGISTERS.mid;
-      return { ...register, frets: Array.from({ length: register.end - register.start + 1 }, (_, index) => register.start + index) };
+      const registerKey = harmonyRegisterSelect.value;
+      const targetString = registerKey === "low" ? Math.max(0, STRING_KEYS.length - 6) : registerKey === "upper" ? Math.max(0, STRING_KEYS.length - 2) : Math.floor((STRING_KEYS.length - 1) / 2);
+      return { ...register, targetString, frets: Array.from({ length: register.end - register.start + 1 }, (_, index) => register.start + index) };
     }
     function directedSemitoneDistance(fromPc, toPc, direction) {
       const diff = direction === "below" ? (fromPc - toPc + 12) % 12 : (toPc - fromPc + 12) % 12;
@@ -5060,7 +5492,7 @@
     function buildHarmonyPairs(root, scale, typeKey, direction, range) {
       const scaleNotes = getScaleNotes(root, scale);
       let previousLead = { fret: range.targetFret, stringIndex: range.targetString };
-      let previousHarmony = { fret: range.targetFret, stringIndex: direction === "below" ? Math.max(0, range.targetString - 1) : Math.min(5, range.targetString + 1) };
+      let previousHarmony = { fret: range.targetFret, stringIndex: direction === "below" ? Math.max(0, range.targetString - 1) : Math.min(STRING_KEYS.length - 1, range.targetString + 1) };
       return HARMONY_MELODY_PATTERN.map((patternIndex, phraseIndex) => {
         const leadIndex = patternIndex % scaleNotes.length;
         const lead = scaleNotes[leadIndex];
@@ -5146,7 +5578,7 @@
         return `<div class="harmony-pair-card"><span>${escapeHtml(lead.degree)} to ${escapeHtml(harmony.harmonyDegree || harmony.degree)}</span><strong>${escapeHtml(lead.note)} -> ${escapeHtml(harmony.note)}</strong></div>`;
       }).join("");
       harmonyFretboardTitle.textContent = `${root} ${scale.name} Harmony Fretboard`;
-      harmonyFretboardMeta.textContent = `${currentTuning().name}, ${HARMONY_REGISTERS[harmonyRegisterSelect.value].name}, ${type.name} ${directionLabel}`;
+      harmonyFretboardMeta.textContent = `${instrumentLabel()}, ${HARMONY_REGISTERS[harmonyRegisterSelect.value].name}, ${type.name} ${directionLabel}`;
       renderHarmonyFretboard(pairs, range);
       const sections = buildHarmonyTabSections(pairs, type, directionLabel);
       const intro = `${root} ${scale.name}, ${type.name} ${directionLabel}: ${scaleNotes.map((lead, index) => {
@@ -5155,12 +5587,12 @@
       }).join("  ")}`;
       const tab = makeTab(`${root} ${scale.name} Harmony Tab`, `${type.name} ${directionLabel}`, sections, intro);
       harmonyTabTitle.textContent = tab.title;
-      harmonyTabHint.textContent = `${currentTuning().name}, ${HARMONY_REGISTERS[harmonyRegisterSelect.value].name}`;
+      harmonyTabHint.textContent = `${instrumentLabel()}, ${HARMONY_REGISTERS[harmonyRegisterSelect.value].name}`;
       harmonyTabSummary.innerHTML = [
         ["Root", root],
         ["Scale", scale.name],
         ["Harmony", `${type.name} ${directionLabel}`],
-        ["Tuning", currentTuning().name],
+        ["Tuning", instrumentLabel()],
         ["Register", HARMONY_REGISTERS[harmonyRegisterSelect.value].name],
         ["Idea", type.mode === "fixed" ? "fixed semitones" : "scale degrees"]
       ].map(item => `<div class="tab-summary-item"><span>${escapeHtml(item[0])}</span><strong>${escapeHtml(item[1])}</strong></div>`).join("");
@@ -5232,7 +5664,7 @@
       renderScaleChordHelp(root, scale, notes);
       renderIntervalHelp(scale, root);
       scaleFretboardTitle.textContent = `${root} ${scale.name} Fretboard`;
-      scaleFretboardMeta.textContent = `${currentTuning().name}, ${SHAPE_LABELS[shape]} shape`;
+      scaleFretboardMeta.textContent = `${instrumentLabel()}, ${SHAPE_LABELS[shape]} shape`;
       renderFretboardGrid(scaleFretboard, scaleFretNumbers, root, scale, shape);
       const jamKeys = Array.from(keySelect.options).map(option => option.value);
       const canUseJamKey = jamKeys.includes(root);
@@ -5270,14 +5702,14 @@
       const shape = scaleShapeSelect.value;
       const notes = getScaleNotes(root, scale);
       const sections = buildScaleTab(root, scale, shape);
-      const tab = makeTab(`${root} ${scale.name} Tab`, `${currentTuning().name}, ${SHAPE_LABELS[shape]} shape`, sections, `${root} ${scale.name}: ${notes.map(note => `${note.degree}=${note.note}`).join("  ")}`);
+      const tab = makeTab(`${root} ${scale.name} Tab`, `${instrumentLabel()}, ${SHAPE_LABELS[shape]} shape`, sections, `${root} ${scale.name}: ${notes.map(note => `${note.degree}=${note.note}`).join("  ")}`);
       tabTitle.textContent = tab.title;
       tabHint.textContent = tab.hint;
-      tabSubtitle.textContent = `Generated from ${root} ${scale.name}, ${currentTuning().name} tuning, ${SHAPE_LABELS[shape]} shape.`;
+      tabSubtitle.textContent = `Generated from ${root} ${scale.name}, ${instrumentLabel()}, ${SHAPE_LABELS[shape]} shape.`;
       tabSummary.innerHTML = [
         ["Root", root],
         ["Scale", scale.name],
-        ["Tuning", currentTuning().name],
+        ["Tuning", instrumentLabel()],
         ["Category", selectedScaleCategory],
         ["Shape", SHAPE_LABELS[shape]],
         ["Formula", scale.degrees.join(" ")]
@@ -5299,7 +5731,7 @@
           const title = `${event.note} (${event.degree}) at fret ${event.display}`;
           return `<span class="${className}" style="--x: ${x}px;" title="${escapeHtml(title)}"><strong>${escapeHtml(event.display)}</strong><span>${escapeHtml(event.degree || event.note)}</span></span>`;
         }).join("")).join("");
-        return `<div class="tab-string-letter">${escapeHtml(stringLabel(stringKey))}</div><div class="tab-string-track">${notes}</div>`;
+        return `<div class="tab-string-letter">${escapeHtml(tabStringLabel(stringKey))}</div><div class="tab-string-track">${notes}</div>`;
       }).join("");
       return `<article class="tab-visual-section"><div class="tab-visual-title"><h4>${escapeHtml(section.label)}</h4><span>${escapeHtml(section.meta)}</span></div><div class="tab-staff"><div class="tab-staff-grid" style="--lane-width: ${laneWidth}px;">${rows}</div></div></article>`;
     }
@@ -5315,7 +5747,7 @@
           const value = step.filter(event => event.string === stringKey).map(event => event.display).join("/");
           return centerTabCell(value, cellWidth);
         }).join("");
-        return `${stringLabel(stringKey)}|${cells}|`;
+        return `${tabStringLabel(stringKey)}|${cells}|`;
       }).join("\n");
     }
     function centerTabCell(value, width) {
@@ -5334,8 +5766,17 @@
       renderCircleScale();
       renderFretMath();
       renderCaged();
+      renderTuningComparison();
       renderBeats();
-    }    tuningSelect.addEventListener("change", function() {
+    }
+    stringCountSelect.addEventListener("change", function() {
+      configureInstrument(Number(stringCountSelect.value), "standard");
+      rerenderAll();
+      resetPracticeScale();
+      resetPracticeCaged();
+      newFretChallenge(false);
+    });
+    tuningSelect.addEventListener("change", function() {
       rerenderAll();
       resetPracticeScale();
       resetPracticeCaged();
@@ -5497,6 +5938,20 @@
     practiceFretResetBtn.addEventListener("click", resetFretPracticeScore);
     practiceFretNextWeakBtn.addEventListener("click", function() { newFretChallenge(true); });
 
+    compareStringCountA.addEventListener("change", function() {
+      populateCompareTuning(compareTuningA, Number(compareStringCountA.value), "standard");
+      renderTuningComparison();
+    });
+    compareStringCountB.addEventListener("change", function() {
+      populateCompareTuning(compareTuningB, Number(compareStringCountB.value), "standard");
+      renderTuningComparison();
+    });
+    compareTuningA.addEventListener("change", renderTuningComparison);
+    compareTuningB.addEventListener("change", renderTuningComparison);
+
+    configureInstrument(6, "standard");
+    populateCompareTuning(compareTuningA, 6, "standard");
+    populateCompareTuning(compareTuningB, 8, "standard");
     populatePracticeRoots();
     populateScaleSelect();
     populateCagedScaleSelect();
