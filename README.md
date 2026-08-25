@@ -18,6 +18,10 @@ The app is organized into five top-level sections:
 
 ## Features
 
+### Light And Dark Themes
+
+Use the top-bar theme control to choose Light, Auto, or Dark. Auto follows the operating-system preference, and the selected mode is remembered in the browser. The theme applies to fretboards, chord diagrams, tabs, practice tools, and the circle of fifths.
+
 ### Circle Of Fifths And Scale Generator
 
 - Choose a root note and scale/mode.

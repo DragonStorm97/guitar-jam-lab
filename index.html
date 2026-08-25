@@ -4,6 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Guitar Jam Lab</title>
+  <script>
+    (function() {
+      var preference = "system";
+      try { preference = localStorage.getItem("guitarJamLabTheme") || "system"; } catch (error) {}
+      if (!["light", "system", "dark"].includes(preference)) preference = "system";
+      var resolved = preference === "system"
+        ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        : preference;
+      document.documentElement.dataset.theme = resolved;
+      document.documentElement.dataset.themePreference = preference;
+    })();
+  </script>
   <style>
     :root {
       --ink: #161616;
@@ -19,9 +31,105 @@
       --blue-soft: #e1eaff;
       --gold: #b7791f;
       --gold-soft: #fff0c2;
+      --on-accent: #ffffff;
+      --teal-ink: #084a45;
+      --red-ink: #741f1b;
+      --gold-ink: #6c3d00;
+      --selection-bg: var(--ink);
+      --selection-ink: var(--paper);
+      --circle-core-bg: var(--ink);
+      --circle-core-ink: var(--paper);
+      --surface-subtle: #fffdf8;
+      --surface-muted: #f5f2eb;
+      --surface-warm: #fffaf0;
+      --surface-quiet: #f7f2e8;
+      --surface-disabled: #eee9e0;
+      --header: rgba(251, 250, 246, 0.94);
+      --section: rgba(255, 255, 255, 0.86);
+      --section-header: rgba(255, 255, 255, 0.64);
+      --tabs-surface: rgba(255, 255, 255, 0.76);
+      --fretboard-base: #e8ddce;
+      --fretboard-label: #f6efe4;
+      --fretboard-edge: #27221d;
+      --fretboard-fret: rgba(70, 54, 36, 0.38);
+      --fretboard-string: rgba(55, 48, 40, 0.45);
+      --fretboard-row: rgba(90, 72, 49, 0.35);
+      --tab-string: rgba(55, 48, 40, 0.4);
+      --tab-row: rgba(90, 72, 49, 0.25);
+      --circle-center: #fffdf8;
+      --circle-field: rgba(247, 242, 232, 0.98);
+      --circle-line: rgba(71, 57, 40, 0.16);
+      --circle-outside: #f4f1eb;
+      --circle-outside-ink: #66635d;
+      --circle-outside-line: #ded8cf;
+      --circle-major: rgba(184, 51, 47, 0.76);
+      --circle-minor: rgba(15, 118, 110, 0.68);
+      --circle-diminished: rgba(71, 85, 105, 0.66);
+      --circle-augmented: rgba(182, 107, 21, 0.68);
+      --circle-other: rgba(56, 91, 164, 0.55);
+      --circle-scale: rgba(56, 91, 164, 0.5);
+      --circle-outside-band: rgba(223, 217, 207, 0.78);
+      --circle-outside-scale: rgba(223, 217, 207, 0.62);
       --shadow: 0 10px 28px rgba(18, 18, 18, 0.09);
       color-scheme: light;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    :root[data-theme="dark"] {
+      --ink: #f3f1eb;
+      --muted: #aaa9a2;
+      --paper: #101311;
+      --panel: #1a1e1b;
+      --line: #3b423e;
+      --teal: #55b9ab;
+      --teal-soft: #173b35;
+      --red: #df6a63;
+      --red-soft: #462421;
+      --blue: #84aaf0;
+      --blue-soft: #203253;
+      --gold: #d6a04b;
+      --gold-soft: #403218;
+      --on-accent: #ffffff;
+      --teal-ink: #a5eee3;
+      --red-ink: #ffc0bb;
+      --gold-ink: #f4cf88;
+      --selection-bg: #31413b;
+      --selection-ink: #f3f1eb;
+      --circle-core-bg: #0d0f0d;
+      --circle-core-ink: #f3f1eb;
+      --surface-subtle: #161a18;
+      --surface-muted: #202421;
+      --surface-warm: #211f1a;
+      --surface-quiet: #1d211e;
+      --surface-disabled: #20231f;
+      --header: rgba(16, 19, 17, 0.94);
+      --section: rgba(26, 30, 27, 0.94);
+      --section-header: rgba(31, 36, 32, 0.88);
+      --tabs-surface: rgba(26, 30, 27, 0.9);
+      --fretboard-base: #292821;
+      --fretboard-label: #22251f;
+      --fretboard-edge: #0d0f0d;
+      --fretboard-fret: rgba(220, 210, 188, 0.28);
+      --fretboard-string: rgba(234, 227, 209, 0.46);
+      --fretboard-row: rgba(220, 210, 188, 0.2);
+      --tab-string: rgba(234, 227, 209, 0.38);
+      --tab-row: rgba(220, 210, 188, 0.18);
+      --circle-center: #171b18;
+      --circle-field: rgba(30, 35, 31, 0.98);
+      --circle-line: rgba(229, 224, 209, 0.18);
+      --circle-outside: #202420;
+      --circle-outside-ink: #a4a79f;
+      --circle-outside-line: #444b46;
+      --circle-major: rgba(223, 106, 99, 0.82);
+      --circle-minor: rgba(85, 185, 171, 0.76);
+      --circle-diminished: rgba(126, 144, 169, 0.76);
+      --circle-augmented: rgba(214, 160, 75, 0.78);
+      --circle-other: rgba(132, 170, 240, 0.7);
+      --circle-scale: rgba(132, 170, 240, 0.62);
+      --circle-outside-band: rgba(61, 68, 63, 0.86);
+      --circle-outside-scale: rgba(61, 68, 63, 0.72);
+      --shadow: 0 12px 30px rgba(0, 0, 0, 0.34);
+      color-scheme: dark;
     }
 
     * {
@@ -65,16 +173,16 @@
     }
 
     button.primary {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: #fff;
+      background: var(--selection-bg);
+      border-color: var(--selection-bg);
+      color: var(--selection-ink);
     }
 
     button.active,
     .mode-button.active {
       background: var(--teal-soft);
       border-color: var(--teal);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .app-shell {
@@ -88,7 +196,7 @@
       top: 0;
       z-index: 10;
       border-bottom: 1px solid var(--line);
-      background: rgba(251, 250, 246, 0.94);
+      background: var(--header);
       backdrop-filter: blur(14px);
     }
 
@@ -166,6 +274,43 @@
       justify-content: flex-end;
     }
 
+    .theme-toggle {
+      min-height: 42px;
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      align-items: stretch;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .theme-button {
+      min-height: 40px;
+      padding: 0 10px;
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-radius: 0;
+      box-shadow: none;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .theme-button:last-child {
+      border-right: 0;
+    }
+
+    .theme-button:hover {
+      transform: none;
+      background: var(--surface-muted);
+    }
+
+    .theme-button[aria-pressed="true"] {
+      background: var(--selection-bg);
+      color: var(--selection-ink);
+    }
+
     .select-group,
     .tempo-group {
       border: 1px solid var(--line);
@@ -216,7 +361,7 @@
       margin-top: 18px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.86);
+      background: var(--section);
       box-shadow: var(--shadow);
       overflow: hidden;
     }
@@ -228,7 +373,7 @@
       gap: 16px;
       padding: 16px 18px;
       border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.64);
+      background: var(--section-header);
     }
 
     .section-header h2 {
@@ -347,7 +492,7 @@
     .beat.active {
       background: var(--gold-soft);
       border-color: var(--gold);
-      color: #6c3d00;
+      color: var(--gold-ink);
     }
 
     .transport {
@@ -418,10 +563,10 @@
       margin-top: 10px;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       font-size: 0.92rem;
-      color: #2a2a2a;
+      color: var(--ink);
       padding: 8px 10px;
       border-radius: 8px;
-      background: #f5f2eb;
+      background: var(--surface-muted);
       overflow-x: auto;
     }
 
@@ -457,7 +602,7 @@
       gap: 14px;
       padding: 12px 14px;
       border-bottom: 1px solid var(--line);
-      background: #fffaf0;
+      background: var(--surface-warm);
     }
 
     .tab-card-header h3 {
@@ -474,7 +619,7 @@
       display: grid;
       gap: 14px;
       padding: 14px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
     }
 
     .tab-visual-section {
@@ -491,7 +636,7 @@
       gap: 12px;
       padding: 10px 12px;
       border-bottom: 1px solid var(--line);
-      background: #f7f2e8;
+      background: var(--surface-quiet);
     }
 
     .tab-visual-title h4 {
@@ -525,7 +670,7 @@
       color: var(--muted);
       font-weight: 900;
       font-size: 0.86rem;
-      background: #f5f2eb;
+      background: var(--surface-muted);
       border-right: 1px solid var(--line);
     }
 
@@ -533,7 +678,7 @@
       min-width: var(--lane-width);
       height: 42px;
       position: relative;
-      border-bottom: 1px solid rgba(90, 72, 49, 0.25);
+      border-bottom: 1px solid var(--tab-row);
     }
 
     .tab-string-track::before {
@@ -543,7 +688,7 @@
       right: 0;
       top: 50%;
       height: 2px;
-      background: rgba(55, 48, 40, 0.4);
+      background: var(--tab-string);
       transform: translateY(-50%);
     }
 
@@ -559,7 +704,7 @@
       display: grid;
       grid-template-rows: 15px 10px;
       place-items: center;
-      color: #fff;
+      color: var(--on-accent);
       z-index: 1;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
     }
@@ -613,7 +758,7 @@
     .raw-tab-label {
       padding: 10px 14px;
       border-top: 1px solid var(--line);
-      background: #27221d;
+      background: var(--fretboard-edge);
       color: #f9f0df;
       font-size: 0.82rem;
       font-weight: 800;
@@ -625,7 +770,7 @@
       font-size: clamp(0.78rem, 1.4vw, 1rem);
       line-height: 1.55;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      background: #171717;
+      background: #111412;
       color: #f9f0df;
     }
 
@@ -666,17 +811,17 @@
       min-width: 680px;
       display: grid;
       grid-template-columns: 48px repeat(5, 1fr);
-      border-left: 6px solid #27221d;
+      border-left: 6px solid var(--fretboard-edge);
       background:
-        linear-gradient(90deg, transparent 47px, rgba(255,255,255,0.7) 48px),
-        linear-gradient(#e8ddce 0 0);
+        linear-gradient(90deg, transparent 47px, var(--circle-line) 48px),
+        linear-gradient(var(--fretboard-base) 0 0);
       position: relative;
     }
 
     .fretboard .string-label,
     .fretboard .cell {
       height: 48px;
-      border-bottom: 1px solid rgba(90, 72, 49, 0.35);
+      border-bottom: 1px solid var(--fretboard-row);
       position: relative;
     }
 
@@ -685,11 +830,11 @@
       place-items: center;
       color: var(--muted);
       font-weight: 800;
-      background: #f6efe4;
+      background: var(--fretboard-label);
     }
 
     .fretboard .cell {
-      border-right: 3px solid rgba(70, 54, 36, 0.38);
+      border-right: 3px solid var(--fretboard-fret);
       display: grid;
       place-items: center;
     }
@@ -701,21 +846,21 @@
       right: 0;
       top: 50%;
       height: 2px;
-      background: rgba(55, 48, 40, 0.45);
+      background: var(--fretboard-string);
       transform: translateY(-50%);
     }
 
     .fretboard .string-label.extended-muted,
     .fretboard .cell.extended-muted {
-      background: #eee9e0;
-      color: #7b746b;
+      background: var(--surface-disabled);
+      color: var(--muted);
     }
 
     .fretboard .cell.extended-muted::after {
       content: "x";
       position: relative;
       z-index: 1;
-      color: #8b847b;
+      color: var(--muted);
       font-size: 0.72rem;
       font-weight: 900;
     }
@@ -726,7 +871,7 @@
       border-radius: 50%;
       display: grid;
       place-items: center;
-      color: #fff;
+      color: var(--on-accent);
       font-size: 0.74rem;
       font-weight: 900;
       z-index: 1;
@@ -803,7 +948,7 @@
     .harmony-explainer {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 12px;
       display: grid;
       gap: 6px;
@@ -920,9 +1065,9 @@
       margin: 0 auto 14px;
       border-radius: 50%;
       background:
-        radial-gradient(circle, #fffdf8 0 27%, transparent 28%),
-        radial-gradient(circle, rgba(255,255,255,0.88) 0 55%, rgba(247,242,232,0.98) 56% 100%);
-      box-shadow: inset 0 0 0 1px rgba(71, 57, 40, 0.12);
+        radial-gradient(circle, var(--circle-center) 0 27%, transparent 28%),
+        radial-gradient(circle, color-mix(in srgb, var(--circle-center) 88%, transparent) 0 55%, var(--circle-field) 56% 100%);
+      box-shadow: inset 0 0 0 1px var(--circle-line);
       overflow: visible;
     }
 
@@ -936,12 +1081,12 @@
 
     .circle-chart::before {
       inset: 12%;
-      border: 1px solid rgba(71, 57, 40, 0.16);
+      border: 1px solid var(--circle-line);
     }
 
     .circle-chart::after {
       inset: 30%;
-      border: 1px solid rgba(71, 57, 40, 0.16);
+      border: 1px solid var(--circle-line);
     }
 
     .circle-band {
@@ -978,7 +1123,7 @@
       display: grid;
       place-items: center;
       border-radius: 999px;
-      border: 1px solid rgba(71, 57, 40, 0.15);
+      border: 1px solid var(--circle-line);
       line-height: 1;
       pointer-events: none;
       white-space: nowrap;
@@ -988,7 +1133,7 @@
       min-width: 38px;
       height: 18px;
       padding: 0 6px;
-      color: #fff;
+      color: var(--on-accent);
       font-size: 0.58rem;
       font-weight: 900;
       z-index: 4;
@@ -1000,8 +1145,8 @@
       min-width: 36px;
       height: 22px;
       padding: 0 6px;
-      background: #fffdf8;
-      color: #2f332f;
+      background: var(--surface-subtle);
+      color: var(--ink);
       font-size: 0.66rem;
       font-weight: 900;
       z-index: 3;
@@ -1010,34 +1155,34 @@
     .degree-label.root {
       background: var(--red-soft);
       border-color: rgba(184, 51, 47, 0.36);
-      color: #741f1b;
+      color: var(--red-ink);
     }
 
     .quality-label.major,
     .quality-dot.major {
-      background: #b8332f;
+      background: var(--red);
     }
 
     .quality-label.minor,
     .quality-dot.minor {
-      background: #0f766e;
+      background: var(--teal);
     }
 
     .quality-label.diminished,
     .quality-dot.diminished {
-      background: #475569;
+      background: var(--circle-diminished);
     }
 
     .quality-label.augmented,
     .quality-dot.augmented {
-      background: #b66b15;
+      background: var(--gold);
     }
 
     .quality-label.scale,
     .quality-label.other,
     .quality-dot.scale,
     .quality-dot.other {
-      background: #385ba4;
+      background: var(--blue);
     }
 
     .circle-note {
@@ -1048,7 +1193,7 @@
       display: grid;
       place-items: center;
       font-weight: 900;
-      background: #fff;
+      background: var(--panel);
       z-index: 2;
       transition: border-color 140ms ease, background 140ms ease, box-shadow 140ms ease, color 140ms ease;
     }
@@ -1059,9 +1204,9 @@
     }
 
     .circle-note.outside {
-      background: #f4f1eb;
-      color: #66635d;
-      border-color: #ded8cf;
+      background: var(--circle-outside);
+      color: var(--circle-outside-ink);
+      border-color: var(--circle-outside-line);
     }
 
     .circle-note:hover,
@@ -1074,7 +1219,7 @@
     .circle-note.active {
       background: var(--red-soft);
       border-color: var(--red);
-      color: #741f1b;
+      color: var(--red-ink);
       box-shadow: inset 0 0 0 2px rgba(184, 51, 47, 0.16);
     }
 
@@ -1082,7 +1227,7 @@
     .circle-note.active:active {
       background: var(--red-soft);
       border-color: var(--red);
-      color: #741f1b;
+      color: var(--red-ink);
       transform: translate(-50%, -50%);
     }
 
@@ -1093,8 +1238,8 @@
       display: grid;
       place-items: center;
       text-align: center;
-      background: var(--ink);
-      color: #fff;
+      background: var(--circle-core-bg);
+      color: var(--circle-core-ink);
       box-shadow: var(--shadow);
       z-index: 3;
       padding: 10px;
@@ -1167,7 +1312,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 7px 10px;
-      background: #f5f2eb;
+      background: var(--surface-muted);
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       font-size: 0.9rem;
       font-weight: 800;
@@ -1183,7 +1328,7 @@
       border: 1px solid var(--line);
       border-radius: 8px;
       padding: 10px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       display: grid;
       gap: 4px;
     }
@@ -1237,7 +1382,7 @@
     .category-button.active {
       background: var(--teal-soft);
       border-color: var(--teal);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .popular-scale-row {
@@ -1259,15 +1404,15 @@
     .popular-scale-button {
       min-height: 32px;
       padding: 7px 10px;
-      border-color: #d8d2c7;
-      background: #fffaf2;
-      color: #1f2328;
+      border-color: var(--line);
+      background: var(--surface-warm);
+      color: var(--ink);
       font-size: 0.78rem;
     }
 
     .popular-scale-button:hover {
       border-color: var(--teal);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .circle-note .note-label {
@@ -1282,7 +1427,7 @@
     }
 
     .circle-note.active .interval-label {
-      color: #741f1b;
+      color: var(--red-ink);
     }
 
     .circle-ring-legend {
@@ -1375,7 +1520,7 @@
     .chord-size-button.active {
       border-color: var(--teal);
       background: var(--teal-soft);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .chord-family-grid {
@@ -1436,7 +1581,7 @@
     .interval-quality {
       min-width: 0;
       border-left: 3px solid var(--gold);
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 8px 9px;
       display: grid;
       gap: 3px;
@@ -1465,9 +1610,9 @@
     }
 
     .interval-symbol {
-      border: 1px solid #e3d8c7;
+      border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 8px;
       display: grid;
       gap: 2px;
@@ -1487,7 +1632,7 @@
       margin-top: 12px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffaf2;
+      background: var(--surface-warm);
       padding: 12px;
       display: grid;
       gap: 9px;
@@ -1511,9 +1656,9 @@
     }
 
     .interval-key {
-      border: 1px solid #e3d8c7;
+      border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 8px;
       display: grid;
       gap: 2px;
@@ -1580,7 +1725,7 @@
     .fret-math-range {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 9px 10px;
       display: grid;
       grid-template-columns: auto minmax(120px, 1fr) 30px;
@@ -1612,7 +1757,7 @@
       margin: 0 auto;
       border: 2px solid var(--line);
       border-radius: 50%;
-      background: radial-gradient(circle, #fffdf8 0 47%, #f4eee4 48% 49%, #fffdf8 50% 100%);
+      background: radial-gradient(circle, var(--surface-subtle) 0 47%, var(--line) 48% 49%, var(--surface-subtle) 50% 100%);
     }
 
     .fret-math-wheel-point {
@@ -1724,7 +1869,7 @@
     .fret-math-strip {
       min-width: max-content;
       display: flex;
-      background: #fffdf8;
+      background: var(--surface-subtle);
     }
 
     .fret-math-cell {
@@ -1808,7 +1953,7 @@
       grid-template-columns: repeat(3, minmax(120px, 1fr));
       gap: 10px;
       padding: 14px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       border-bottom: 1px solid var(--line);
     }
 
@@ -1917,7 +2062,7 @@
       min-width: 52px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 7px 8px;
       display: grid;
       gap: 1px;
@@ -1990,7 +2135,7 @@
       height: 11px;
       border-radius: 3px;
       border: 1px solid var(--line);
-      background: #fffdf8;
+      background: var(--surface-subtle);
     }
 
     .tuning-legend i.high { background: var(--teal-soft); border-color: var(--teal); }
@@ -2001,9 +2146,9 @@
       margin: 18px auto 0;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.76);
+      background: var(--tabs-surface);
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       grid-auto-rows: min-content;
       align-items: center;
       padding: 6px;
@@ -2020,9 +2165,9 @@
     }
 
     .app-tab[aria-selected="true"] {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: #fff;
+      background: var(--selection-bg);
+      border-color: var(--selection-bg);
+      color: var(--selection-ink);
     }
 
     .tab-page {
@@ -2067,7 +2212,7 @@
     .caged-shape-button.active {
       background: var(--teal-soft);
       border-color: var(--teal);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .caged-select-grid {
@@ -2085,7 +2230,7 @@
     .caged-card {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 10px;
       display: grid;
       gap: 3px;
@@ -2113,9 +2258,9 @@
     .marker.caged-scale {
       width: 24px;
       height: 24px;
-      background: #e6f5f1;
+      background: var(--teal-soft);
       border: 1px solid rgba(15, 118, 110, 0.22);
-      color: #0f766e;
+      color: var(--teal);
       font-size: 0.62rem;
       box-shadow: none;
     }
@@ -2188,9 +2333,9 @@
 
     .practice-mode-button[aria-selected="true"],
     .practice-stage-button[aria-pressed="true"] {
-      background: var(--ink);
-      border-color: var(--ink);
-      color: #fff;
+      background: var(--selection-bg);
+      border-color: var(--selection-bg);
+      color: var(--selection-ink);
     }
 
     .practice-summary {
@@ -2206,7 +2351,7 @@
     .practice-progress-track {
       height: 8px;
       border-radius: 6px;
-      background: #e6e0d7;
+      background: var(--surface-disabled);
       overflow: hidden;
     }
 
@@ -2257,7 +2402,7 @@
       border: 1px solid var(--line);
       border-left: 4px solid var(--teal);
       border-radius: 8px;
-      background: #fffdf8;
+      background: var(--surface-subtle);
       padding: 12px 14px;
       display: grid;
       gap: 4px;
@@ -2336,7 +2481,7 @@
     .practice-step.complete {
       border-color: var(--teal);
       background: var(--teal-soft);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .practice-scrolling-tab {
@@ -2366,7 +2511,7 @@
       align-items: center;
       justify-items: center;
       border-right: 1px solid var(--line);
-      background: var(--cream);
+      background: var(--surface-muted);
       color: var(--muted);
       font-size: 0.72rem;
       font-weight: 900;
@@ -2392,7 +2537,7 @@
     .practice-tab-string-lines span {
       display: block;
       width: 100%;
-      border-top: 1px solid rgba(55, 48, 40, 0.42);
+      border-top: 1px solid var(--tab-string);
     }
 
     .practice-tab-playhead {
@@ -2455,7 +2600,7 @@
     .practice-tab-beat.is-past .practice-tab-slot.has-note {
       border-color: var(--teal);
       background: var(--teal-soft);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .practice-tab-beat-number {
@@ -2482,7 +2627,7 @@
     }
 
     .fretboard button.practice-cell:hover {
-      background: rgba(255, 255, 255, 0.38);
+      background: color-mix(in srgb, var(--panel) 58%, transparent);
     }
 
     .fretboard button.practice-cell:focus-visible {
@@ -2539,14 +2684,14 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      color: #6c3d00;
+      color: var(--gold-ink);
       font-size: 0.84rem;
       line-height: 1.4;
     }
 
     .practice-compatibility.ok {
       background: var(--teal-soft);
-      color: #084a45;
+      color: var(--teal-ink);
     }
 
     .practice-compatibility button {
@@ -2618,8 +2763,13 @@
 
       .controls,
       .select-group,
-      .tempo-group {
+      .tempo-group,
+      .theme-toggle {
         width: 100%;
+      }
+
+      .theme-toggle {
+        grid-template-columns: repeat(3, 1fr);
       }
 
       .select-group,
@@ -2742,10 +2892,15 @@
               <option value="openD">Open D</option>
             </select>
           </div>
-<div class="tempo-group">
+          <div class="tempo-group">
             <label for="tempoRange">Tempo</label>
             <input id="tempoRange" type="range" min="54" max="132" step="2" value="82">
             <strong id="tempoValue">82</strong>
+          </div>
+          <div class="theme-toggle" role="group" aria-label="Color theme">
+            <button class="theme-button" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+            <button class="theme-button" type="button" data-theme-choice="system" aria-pressed="true">Auto</button>
+            <button class="theme-button" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
           </div>
           <button id="audioToggle" aria-pressed="false">Silent</button>
         </div>
@@ -3507,15 +3662,15 @@
     const QUALITY_NAMES = { major: "Major", minor: "Minor", diminished: "Diminished", augmented: "Augmented", other: "Other", scale: "Scale tone", outside: "Outside" };
     const QUALITY_SHORT = { major: "Maj", minor: "min", diminished: "dim", augmented: "aug", other: "tone", scale: "tone" };
     const QUALITY_COLORS = {
-      major: "rgba(184, 51, 47, 0.76)",
-      minor: "rgba(15, 118, 110, 0.68)",
-      diminished: "rgba(71, 85, 105, 0.66)",
-      augmented: "rgba(182, 107, 21, 0.68)",
-      other: "rgba(56, 91, 164, 0.55)",
-      scale: "rgba(56, 91, 164, 0.5)",
-      outside: "rgba(223, 217, 207, 0.78)"
+      major: "var(--circle-major)",
+      minor: "var(--circle-minor)",
+      diminished: "var(--circle-diminished)",
+      augmented: "var(--circle-augmented)",
+      other: "var(--circle-other)",
+      scale: "var(--circle-scale)",
+      outside: "var(--circle-outside-band)"
     };
-    const SCALE_COLORS = { root: "rgba(184, 51, 47, 0.9)", scale: "rgba(15, 118, 110, 0.62)", outside: "rgba(223, 217, 207, 0.62)" };
+    const SCALE_COLORS = { root: "var(--red)", scale: "var(--circle-minor)", outside: "var(--circle-outside-scale)" };
     const INTERVAL_LABELS = ["1", "b2", "2", "b3", "3", "4", "b5", "5", "b6", "6", "b7", "7"];
     const SHAPE_LABELS = { full: "Full", vertical: "Vertical", diagonal: "Diagonal" };
     const FORM = ["I", "I", "I", "I", "IV", "IV", "I", "I", "V", "IV", "I", "V"];
@@ -3629,6 +3784,7 @@
     let activeTab = "scales";
     let selectedCagedShape = "C";
     const PRACTICE_STORAGE_KEY = "guitarJamLabPracticeV1";
+    const THEME_STORAGE_KEY = "guitarJamLabTheme";
     const PRACTICE_ROOTS = ["A", "C", "G", "E", "D", "F", "Bb", "B", "Eb"];
     const CAGED_ORDER = ["C", "A", "G", "E", "D"];
     const FRETBOARD_INTERVALS = [
@@ -3678,6 +3834,7 @@
     const nextBtn = document.getElementById("nextBtn");
     const resetBtn = document.getElementById("resetBtn");
     const audioToggle = document.getElementById("audioToggle");
+    const themeButtons = document.querySelectorAll(".theme-button");
     const formSubtitle = document.getElementById("formSubtitle");
     const transposeSubtitle = document.getElementById("transposeSubtitle");
     const scaleSubtitle = document.getElementById("scaleSubtitle");
@@ -4335,6 +4492,25 @@
         fretboard: { attempts: 0, correct: 0, sessions: 0 },
         notes: {}
       };
+    }
+
+    const systemThemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    let themePreference = document.documentElement.dataset.themePreference || "system";
+
+    function resolvedTheme(preference) {
+      return preference === "system" ? (systemThemeQuery.matches ? "dark" : "light") : preference;
+    }
+
+    function applyThemePreference(preference, persist) {
+      themePreference = ["light", "system", "dark"].includes(preference) ? preference : "system";
+      document.documentElement.dataset.themePreference = themePreference;
+      document.documentElement.dataset.theme = resolvedTheme(themePreference);
+      themeButtons.forEach(function(button) {
+        button.setAttribute("aria-pressed", String(button.dataset.themeChoice === themePreference));
+      });
+      if (persist) {
+        try { localStorage.setItem(THEME_STORAGE_KEY, themePreference); } catch (error) {}
+      }
     }
 
     function loadPracticeProgress() {
@@ -5340,29 +5516,29 @@
       const baseFret = chord.baseFret || 1;
       let parts = [];
       parts.push(`<svg class="chord-svg" viewBox="0 0 ${width} ${height}" role="img" aria-label="${chord.name} chord diagram">`);
-      parts.push(`<text x="${width / 2}" y="16" text-anchor="middle" font-size="14" font-weight="800" fill="#161616">${chord.name}</text>`);
-      if (baseFret > 1) parts.push(`<text x="9" y="${y0 + 16}" font-size="11" font-weight="700" fill="#5b5d63">${baseFret}fr</text>`);
-      stringXs.forEach((x, i) => parts.push(`<line x1="${x}" y1="${y0}" x2="${x}" y2="${y0 + maxFretRows * fretGap}" stroke="#473928" stroke-width="${1.4 + (stringCount - 1 - i) * 0.14}"/>`));
+      parts.push(`<text x="${width / 2}" y="16" text-anchor="middle" font-size="14" font-weight="800" fill="var(--ink)">${chord.name}</text>`);
+      if (baseFret > 1) parts.push(`<text x="9" y="${y0 + 16}" font-size="11" font-weight="700" fill="var(--muted)">${baseFret}fr</text>`);
+      stringXs.forEach((x, i) => parts.push(`<line x1="${x}" y1="${y0}" x2="${x}" y2="${y0 + maxFretRows * fretGap}" stroke="var(--fretboard-string)" stroke-width="${1.4 + (stringCount - 1 - i) * 0.14}"/>`));
       for (let row = 0; row <= maxFretRows; row++) {
         const y = y0 + row * fretGap;
-        parts.push(`<line x1="${stringXs[0]}" y1="${y}" x2="${stringXs[stringXs.length - 1]}" y2="${y}" stroke="#473928" stroke-width="${row === 0 && baseFret === 1 ? 5 : 2}" stroke-linecap="round"/>`);
+        parts.push(`<line x1="${stringXs[0]}" y1="${y}" x2="${stringXs[stringXs.length - 1]}" y2="${y}" stroke="var(--fretboard-string)" stroke-width="${row === 0 && baseFret === 1 ? 5 : 2}" stroke-linecap="round"/>`);
       }
       (chord.barres || []).forEach(barre => {
         const y = y0 + (barre.fret - baseFret + 0.5) * fretGap;
-        parts.push(`<line x1="${stringXs[barre.from]}" y1="${y}" x2="${stringXs[barre.to]}" y2="${y}" stroke="${barre.color || "#b8332f"}" stroke-width="17" stroke-linecap="round"/>`);
+        parts.push(`<line x1="${stringXs[barre.from]}" y1="${y}" x2="${stringXs[barre.to]}" y2="${y}" stroke="${barre.color || "var(--red)"}" stroke-width="17" stroke-linecap="round"/>`);
       });
       chord.frets.forEach((fret, stringIndex) => {
         const x = stringXs[stringIndex];
-        if (fret == null) parts.push(`<text x="${x}" y="${y0 - 12}" text-anchor="middle" font-size="14" font-weight="900" fill="#5b5d63">x</text>`);
-        else if (fret === 0) parts.push(`<text x="${x}" y="${y0 - 12}" text-anchor="middle" font-size="14" font-weight="900" fill="#0f766e">o</text>`);
+        if (fret == null) parts.push(`<text x="${x}" y="${y0 - 12}" text-anchor="middle" font-size="14" font-weight="900" fill="var(--muted)">x</text>`);
+        else if (fret === 0) parts.push(`<text x="${x}" y="${y0 - 12}" text-anchor="middle" font-size="14" font-weight="900" fill="var(--teal)">o</text>`);
         else {
           const y = y0 + (fret - baseFret + 0.5) * fretGap;
           const isRoot = chord.roots && chord.roots.includes(stringIndex);
-          parts.push(`<circle cx="${x}" cy="${y}" r="9.3" fill="${isRoot ? "#b8332f" : "#0f766e"}"/>`);
-          if (isRoot) parts.push(`<text x="${x}" y="${y + 4}" text-anchor="middle" font-size="9" font-weight="900" fill="#fff">R</text>`);
+          parts.push(`<circle cx="${x}" cy="${y}" r="9.3" fill="${isRoot ? "var(--red)" : "var(--teal)"}"/>`);
+          if (isRoot) parts.push(`<text x="${x}" y="${y + 4}" text-anchor="middle" font-size="9" font-weight="900" fill="var(--on-accent)">R</text>`);
         }
       });
-      currentTuning().labels.forEach((name, i) => parts.push(`<text x="${stringXs[i]}" y="${height - 8}" text-anchor="middle" font-size="11" font-weight="700" fill="#5b5d63">${name}</text>`));
+      currentTuning().labels.forEach((name, i) => parts.push(`<text x="${stringXs[i]}" y="${height - 8}" text-anchor="middle" font-size="11" font-weight="700" fill="var(--muted)">${name}</text>`));
       parts.push("</svg>");
       return parts.join("");
     }
@@ -5828,6 +6004,14 @@
       audioToggle.setAttribute("aria-pressed", String(audioEnabled));
       if (audioEnabled && audioContext && audioContext.state === "suspended") audioContext.resume();
     });
+    themeButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        applyThemePreference(button.dataset.themeChoice, true);
+      });
+    });
+    systemThemeQuery.addEventListener("change", function() {
+      if (themePreference === "system") applyThemePreference("system", false);
+    });
     circleRootSelect.addEventListener("change", () => {
       renderCircleScale();
       renderCaged();
@@ -5960,6 +6144,7 @@
     compareTuningA.addEventListener("change", renderTuningComparison);
     compareTuningB.addEventListener("change", renderTuningComparison);
 
+    applyThemePreference(themePreference, false);
     configureInstrument(6, "standard");
     populateCompareTuning(compareTuningA, 6, "standard");
     populateCompareTuning(compareTuningB, 8, "standard");
